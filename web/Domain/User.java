@@ -1,7 +1,7 @@
 package Domain;
 
 import java.util.Objects;
-
+import Authentication.Password;
 /**
  * @author William Garneau
  */
@@ -10,9 +10,9 @@ public class User {
     private final String lastName;
     private final String email;
     private final int socialId;
-    private final String password;
+    private final Password password;
     
-    public User(String firstName, String lastName, String email, int socialId, String password) {
+    public User(String firstName, String lastName, String email, int socialId, Password password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
