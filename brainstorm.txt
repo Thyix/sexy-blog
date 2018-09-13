@@ -1,0 +1,22 @@
+sexy-blog
+
+1ere page :
+Login
+
+Account ->
+- Mes favoris
+- Mes textes
+- Options
+
+mainFeed ->
+- tri par dates seulement
+
+-> subFeed
+- tri par date
+- tri par sujets
+- main post
+
+- postPage
+- 2 older posts
+- main complete post
+
