@@ -79,12 +79,8 @@
         </div>
         <div id="pagination" name="pagination">
            
-<<<<<<< HEAD:web/TestAjax/posts.jsp
-        </div>         
-=======
         </div>
        <button>Get External Content</button>      
->>>>>>> master:web/posts.jsp
            
         <!-- Bootstrap core JavaScript
     ================================================== -->
