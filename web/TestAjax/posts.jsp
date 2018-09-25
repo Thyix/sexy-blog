@@ -25,13 +25,17 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="loadPosts.js" type="text/javascript"></script> 
+    <script src="loadPagination.js" type="text/javascript"></script> 
   </head>   
     <body>
         <div id="posts" name="posts">
            
         </div>
-        <button>Get External Content</button>      
-            
+        <div id="query" name="query">
+           
+        </div> 
+       <button>Get External Content</button>      
+           
         <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster --> 
