@@ -6,6 +6,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
+    
+    <%@page import="java.text.SimpleDateFormat"%>
+    <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
     <title>Blog Template for Bootstrap</title>
 
@@ -211,6 +214,39 @@
         <a href="#">Back to top</a>
       </p>
     </footer>
+          <%@ page import="java.sql.*"%>
+        <%!
+            ResultSet rs = null;
+            public Connection connectToBD() {
+                Connection conn = null; 
+                try {
+                   Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+                   conn = DriverManager.getConnection(
+                        "jdbc:mysql://localhost/laboratoire-4?verifyServerCertificate=false&useSSL=false&serverTimezone=UTC" + 
+                            "&user=" +
+                            "root" + 
+                            "&password=" +
+                            "root");
+                    return conn;
+                } catch (Exception e) {
+                    System.out.print("La connexion n'a pas pu être établie !");
+                    return null;
+                }
+            }
+
+            public java.sql.Date convertDate(String receivedDate) {
+                SimpleDateFormat simpleDate = new SimpleDateFormat("MM-dd-yyyy");
+                java.util.Date date = null;
+                try {
+                    date = simpleDate.parse(receivedDate);
+                } catch (Exception e) {
+                    System.out.print("La conversion n'a pas fonctionnée.");
+                    return null;
+                }
+                java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                return sqlDate;
+            }
+         %>
     
     <!-- Bootstrap core JavaScript
     ================================================== -->
