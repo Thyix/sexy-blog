@@ -23,7 +23,7 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <link href="blog.css" rel="../stylesheet">
     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
     <script src="loadPosts.js" type="text/javascript"></script> 
     <script src="loadPagination.js" type="text/javascript"></script> 
   </head>   
@@ -31,7 +31,7 @@
         <div id="posts" name="posts">
            
         </div>
-        <div id="query" name="query">
+        <div id="pagination" name="pagination">
            
         </div> 
        <button>Get External Content</button>      

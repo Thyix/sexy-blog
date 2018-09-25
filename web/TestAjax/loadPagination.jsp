@@ -1,17 +1,31 @@
-<%-- 
-    Document   : loadPagination
-    Created on : 2018-09-18, 16:32:19
-    Author     : admin
---%>
+<%@page import="org.json.JSONArray"%>
+<%@page contentType="application/json" pageEncoding="UTF-8"%>
+<%@page import="org.json.JSONObject"%>
+<%@ page import = "java.sql.*" %>
+<%@ page import = "java.util.logging.Logger" %>
+<%@ page import = "java.util.logging.Level" %>      
+<%          
+    Connection connection;
+    PreparedStatement pst;
+    ResultSet rs;  
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+    // Load the JDBC driver      
+    Class.forName("com.mysql.jdbc.Driver").newInstance(); 
+
+    String serverName = "localhost";      
+    String mydatabase = "sexy-blog";      
+    String url = "jdbc:mysql://" + serverName + "/" + mydatabase; // a JDBC url      
+    String username = "root";      
+    String password = "";     
+    connection = DriverManager.getConnection(url, username, password);             
+%>
+<%
+    pst = connection.prepareCall("SELECT count(*) FROM post");
+    rs = pst.executeQuery();
+    rs.first();
+    
+    JSONObject element = new JSONObject();
+    element.put("count", rs.getString((1)));
+    out.print(element);
+    out.flush();
+%>
