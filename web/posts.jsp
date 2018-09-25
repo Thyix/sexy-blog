@@ -33,7 +33,7 @@
         </div>
         <div id="query" name="query">
            
-        </div> 
+        </div>
        <button>Get External Content</button>      
            
         <!-- Bootstrap core JavaScript

@@ -12,7 +12,6 @@
 
     // Load the JDBC driver      
     Class.forName("com.mysql.jdbc.Driver").newInstance(); 
-
     Connection conn = connectToBD();
 %>
 <%
