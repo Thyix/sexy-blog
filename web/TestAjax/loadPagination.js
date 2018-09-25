@@ -1,5 +1,4 @@
 $(document).ready(function() {
-        $('button').click(function() {
             $.ajax({
                 type: "post",
                 url: "loadPagination.jsp",
@@ -23,6 +22,5 @@ $(document).ready(function() {
                      //$("#pagination").html(response.count_post);    
                      $("#pagination").html(str);    
                 }
-            });     
-        });
+            });        
 });
