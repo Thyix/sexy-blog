@@ -25,7 +25,7 @@
     rs.first();
     
     JSONObject element = new JSONObject();
-    element.put("count", rs.getString((1)));
+    element.put("count_post", rs.getString((1)));
     out.print(element);
     out.flush();
 %>
