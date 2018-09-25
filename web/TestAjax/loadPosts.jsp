@@ -1,3 +1,4 @@
+<%@page import="org.json.JSONArray"%>
 <%@page contentType="application/json" pageEncoding="UTF-8"%>
 <%@page import="org.json.JSONObject"%>
 <%@ page import = "java.sql.*" %>
@@ -23,17 +24,18 @@
     rs = pst.executeQuery();
 %>
 <%
-    rs.first();
-%>
-<%
-    JSONObject obj = new JSONObject();
-    
-    obj.put("id_post", rs.getString("id_post"));
-    obj.put("date_post", rs.getString("date_post"));
-    obj.put("title_post", rs.getString("title_post"));
-    obj.put("content_post", rs.getString("content_post"));
-    obj.put("pictureURL_post", rs.getString("pictureURL_post"));
-    
-    out.print(obj);
+    //https://docs.oracle.com/javaee/7/api/javax/json/JsonObject.html
+    JSONArray array = new JSONArray();
+    while (rs.next()) {  
+        JSONObject element = new JSONObject();
+        element.put("id_post", rs.getString("id_post"));
+        element.put("date_post", rs.getString("date_post"));
+        element.put("title_post", rs.getString("title_post"));
+        element.put("content_post", rs.getString("content_post"));
+        element.put("pictureURL_post", rs.getString("pictureURL_post"));
+        array.put(element);
+    }
+
+    out.print(array.toString());
     out.flush();
 %>

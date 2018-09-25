@@ -20,17 +20,13 @@ $(document).ready(function() {
                                        '<img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">' +
                                      '</div>' +
                                 '</div>';
-                                                                     
-                    var res = str.replace("title_post", response.title_post);
-                    res = res.replace("date_post", response.date_post);
-                    res = res.replace("content_post", response.content_post);
-                    $(res).appendTo("#posts");
                     
-                    /*$("<h1>" + response.id_post + "</h1>").appendTo("#posts");
-                    $("<h1>" + response.date_post + "</h1>").appendTo("#posts");
-                    $("<h1>" + response.title_post + "</h1>").appendTo("#posts");
-                    $("<h1>" + response.content_post + "</h1>").appendTo("#posts");
-                    $("<h1>" + response.pictureURL_post + "</h1>").appendTo("#posts");*/
+                    for(var i = 0; i < response.length; i++){
+                        var res = str.replace("title_post", response[i].title_post);
+                        res = res.replace("date_post", response[i].date_post);
+                        res = res.replace("content_post", response[i].content_post);
+                        $(res).appendTo("#posts"); 
+                    }
                 }
             });     
         });
