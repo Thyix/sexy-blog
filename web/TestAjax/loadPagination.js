@@ -8,9 +8,10 @@ $(document).ready(function() {
                                   '<li class="page-item">' +
                                     '<a class="page-link" href="#" tabindex="-1">Previous</a>' +
                                   '</li>';
-                                               
-                     for(var i = 0; i < response.count_post; i++) {
-                        str += '<li class="page-item"><a class="page-link" href="#">' + i + '</a></li>' 
+                                         
+                     var nbPage = response.count_post % 4; // 4 posts per page
+                     for(var i = 0; i <= nbPage; i++) {
+                        str += '<li class="page-item"><a class="page-link" href="?page=' + i + '">' + i + '</a></li>' 
                      }
                      
                      str += '<li class="page-item">' +
@@ -19,7 +20,6 @@ $(document).ready(function() {
                                 '</ul>' +
                              '</nav>';  
                      
-                     //$("#pagination").html(response.count_post);    
                      $("#pagination").html(str);    
                 }
             });        

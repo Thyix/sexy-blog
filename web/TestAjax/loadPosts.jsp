@@ -36,6 +36,6 @@
         array.put(element);
     }
 
-    out.print(array.toString());
+    out.print(array);
     out.flush();
 %>

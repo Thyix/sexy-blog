@@ -2,8 +2,12 @@ $(document).ready(function() {
             $.ajax({
                 type: "post",
                 url: "loadPosts.jsp",
-                data: "page=1",
+                data: "",
                 success: function(response) {
+                    var loc = window.location.href;                
+                    var url = new URL(loc);
+                    var page = url.searchParams.get("page");
+
                     var str;
                     var block =      '<div class="col-md-6">' +
                                      '<div class="card flex-md-row mb-4 shadow-sm h-md-250">' +
@@ -16,11 +20,12 @@ $(document).ready(function() {
                                          '<p class="card-text mb-auto">content_post</p>' +
                                          '<a href="#">Continue reading</a>' +
                                        '</div>' +
-                                       '<img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">' +                                     
+                                       '<img class="card-img-right flex-auto d-none d-lg-block" style="width:200px;height:200px" src="../arch.png" alt="Card image cap">' +                                     
                                      '</div>' + 
                                  '</div>';                          
-
-                    for(var i = 0; i < response.length; i++) {
+                    
+                    // only load 4 posts - not clean for the moment because we fetch everything
+                    for(var i = 0; i < 4; i++) {
                         if (i % 2 === 0) { 
                             str = '<div class="row mb-2">';
                         }
@@ -31,7 +36,7 @@ $(document).ready(function() {
                         
                         str += res;
                         
-                        if (i % 2 === 1) { 
+                        if (i % 2 === 1 || i === response.length - 1) { // if total posts not pair 
                             str += '</div>';                            
                             $(str).appendTo("#posts");     
                             str = "";
