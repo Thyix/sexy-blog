@@ -8,7 +8,6 @@
 | date_post  | DATETIME  |
 | title_post | VARCHAR2(30) |
 | content_post | BLOB |
-| pictureURL_post | BLOB |
 
 ## RelPostTag
 | Column  | Type | Key |
