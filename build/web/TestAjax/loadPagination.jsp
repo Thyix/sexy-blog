@@ -20,24 +20,12 @@
     connection = DriverManager.getConnection(url, username, password);             
 %>
 <%
-    // TO READ https://hackernoon.com/guys-were-doing-pagination-wrong-f6c18a91b232
-    int nbPage = Integer.parseInt(request.getParameter("page")) * 4;
-    pst = connection.prepareCall("SELECT * FROM post LIMIT " + String.valueOf(nbPage) + ",4");
+    pst = connection.prepareCall("SELECT count(*) FROM post");
     rs = pst.executeQuery();
-%>
-<%
-    //https://docs.oracle.com/javaee/7/api/javax/json/JsonObject.html
-    JSONArray array = new JSONArray();
-    while (rs.next()) {        
-        JSONObject element = new JSONObject();
-        element.put("id_post", rs.getString("id_post"));
-        element.put("date_post", rs.getString("date_post"));
-        element.put("title_post", rs.getString("title_post"));
-        element.put("content_post", rs.getString("content_post"));
-        element.put("pictureURL_post", rs.getString("pictureURL_post"));
-        array.put(element);
-    }
-      
-    out.print(array);
+    rs.first();
+    
+    JSONObject element = new JSONObject();
+    element.put("count_post", rs.getString((1)));
+    out.print(element);
     out.flush();
 %>
