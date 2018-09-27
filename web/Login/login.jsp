@@ -32,12 +32,32 @@
             <a class="text-muted" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
             </a>                  
-            <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
-                Sign Up
+            <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Nouveau compte">
+                S'inscrire
             </button>
-            <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
-                Sign In
-            </button>
+              <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" data-placement="bottom" title="Compte existant">Se connecter</button>
+                <ul id="login-dp" class="dropdown-menu">
+                    <li><form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                            <div class="form-group" style="margin-right:5px; margin-left:5px;">
+                                <label class="sr-only" for="exampleInputEmail2">E-mail</label>
+                                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                            </div>
+                            <div class="form-group" style="margin-right:5px; margin-left:5px;">
+                                <label class="sr-only" for="exampleInputPassword2">Mot de passe</label>
+                                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                <div class="help-block text-right">
+                                    <a href="" style="margin-right: 25px;">Mot de passe oublié ?</a></div>
+                            </div>
+                            <div class="form-group" style="margin-right:5px; margin-left:5px;">
+                                <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                <input style="margin-left: 25px;" type="checkbox"> Rester connecté
+                                </label>
+                            </div>
+                        </form>
+                </ul>
         </div>
       </header>
 
