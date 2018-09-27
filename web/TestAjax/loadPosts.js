@@ -1,15 +1,13 @@
 $(document).ready(function() {
-            $.ajax({
-                type: "post",
-                url: "loadPosts.jsp",
-                data: "",
-                success: function(response) {
-                    var loc = window.location.href;                
-                    var url = new URL(loc);
-                    var page = url.searchParams.get("page");
-
-                    var str;
-                    var block =      '<div class="col-md-6">' +
+            var postPerPage = 4;
+    
+    $.post(
+        "ajaxLoadPost.jsp",
+        {pageNumber: 0, postPerPage: postPerPage},
+        function(data) { 
+            $("#posts").html(""); // remove current posts
+            
+            var block =      '<div class="col-md-6">' +
                                      '<div class="card flex-md-row mb-4 shadow-sm h-md-250">' +
                                        '<div class="card-body d-flex flex-column align-items-start">' +
                                          '<strong class="d-inline-block mb-2 text-primary">tag_post</strong>' +
@@ -22,27 +20,26 @@ $(document).ready(function() {
                                        '</div>' +
                                        '<img class="card-img-right flex-auto d-none d-lg-block" style="width:200px;height:200px" src="../arch.png" alt="Card image cap">' +                                     
                                      '</div>' + 
-                                 '</div>';                          
-                    
-                    // only load 4 posts - not clean for the moment because we fetch everything
-                    for(var i = 0; i < 4; i++) {
+                                '</div>';   
+                       
+                var row;  // the row will contains two block
+                for(var i = 0; i < postPerPage; i++) {
                         if (i % 2 === 0) { 
-                            str = '<div class="row mb-2">';
+                            row = '<div class="row mb-2">';
                         }
                         
-                        var res = block.replace("title_post", response[i].title_post);
-                        res = block.replace("date_post", response[i].date_post);
-                        res = block.replace("content_post", response[i].content_post);
+                        var res = block.replace("title_post", data[i].title_post);
+                        res = block.replace("date_post", data[i].date_post);
+                        res = block.replace("content_post", data[i].content_post);                        
+                        row += res;
                         
-                        str += res;
-                        
-                        if (i % 2 === 1 || i === response.length - 1) { // if total posts not pair 
-                            str += '</div>';                            
-                            $(str).appendTo("#posts");     
-                            str = "";
+                        if (i % 2 === 1 || i === data.length - 1) { // if number of post into the row is even or is the last one and the total is odd 
+                            row += '</div>';                            
+                            $(row).appendTo("#posts");     
+                            row = "";
                        }                                                       
-                    }
-                }
-            });     
+                    }    
+        }
+    );
 });
 
