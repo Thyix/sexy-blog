@@ -31,20 +31,45 @@
           <div class="col-4 d-flex justify-content-end align-items-center">
             <a class="text-muted" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
-            </a>                  
-            <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Nouveau compte">
-                S'inscrire
-            </button>
-              <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" data-placement="bottom" title="Compte existant">Se connecter</button>
+            </a>
+              <div>
+              <button id="inscription" type="button" style="margin-right: 15px" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" data-placement="bottom" title="Nouveau compte">S'inscrire</button>
+              <ul id="signup-nav" class="dropdown-menu">
+                    <li><form id="register" class="registerForm" role="form" method="post" action="signup" accept-charset="UTF-8" id="signup-nav">
+                            <div class="form-group" style="margin-right:5px; margin-left:5px;">
+                                <label class="sr-only" for="exampleInputName">Nom complet</label>
+                                <input type="name" class="form-control" id="exampleInputPassword" placeholder="Nom complet" required>
+                            </div>
+                            <div class="form-group" style="margin-right:5px; margin-left:5px;">
+                                <label class="sr-only" for="exampleInputEmail2"> Votre e-mail</label>
+                                <input type="email" class="form-control" id="exampleInputEmail" placeholder="Adresse Mail" required>
+                            </div>
+                            <div class="form-group" style="margin-right:5px; margin-left:5px;">
+                                <label class="sr-only" for="exampleInputPassword2">Nouveau mot de passe</label>
+                                <input type="password" class="form-control" id="exampleInputPassword" placeholder="Mot de passe" required>
+                            </div>
+                            <div class="form-group" style="margin-right:5px; margin-left:5px;">
+                                <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                <input style="margin-left: 35px;" type="checkbox"> Rester connecté
+                                </label>
+                            </div>
+                        </form>
+                </ul>
+              </div>
+              <div>
+              <button id="connection" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" data-placement="bottom" title="Compte existant">Se connecter</button>
                 <ul id="login-dp" class="dropdown-menu">
-                    <li><form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                    <li><form id="login" class="loginForm" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
                                 <label class="sr-only" for="exampleInputEmail2">E-mail</label>
-                                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+                                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Adresse Mail" required>
                             </div>
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
                                 <label class="sr-only" for="exampleInputPassword2">Mot de passe</label>
-                                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+                                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Mot de passe" required>
                                 <div class="help-block text-right">
                                     <a href="" style="margin-right: 25px;">Mot de passe oublié ?</a></div>
                             </div>
@@ -53,12 +78,12 @@
                             </div>
                             <div class="checkbox">
                                 <label>
-                                <input style="margin-left: 25px;" type="checkbox"> Rester connecté
+                                <input style="margin-left: 35px;" type="checkbox"> Rester connecté
                                 </label>
                             </div>
                         </form>
                 </ul>
-        </div>
+              </div>
       </header>
 
       <div class="nav-scroller py-1 mb-2">
