@@ -1,7 +1,6 @@
-$(document).ready(function() {
-            $.ajax({
-                type: "post",
-                url: "loadPagination.jsp",
+function paginationHandler(){
+    $.post({
+                url: "Pagination/paginationLoader.jsp",
                 success: function(response) {
                     var str = '<nav aria-label="Page navigation example">' +
                                 '<ul class="pagination justify-content-center">' +
@@ -9,8 +8,15 @@ $(document).ready(function() {
                                     '<a class="page-link" id="previous" onclick="ajaxPost(this)">Previous</a>' +
                                   '</li>';
                                          
-                     var nbPage = response.count_post % 4; // 4 posts per page
-                     for(var i = 0; i <= nbPage; i++) {
+                    var numberPost = parseInt(response.count_post);
+                   
+                    if(numberPost < 4) { 
+                        numberPost = 1;
+                    } else { 
+                        numberPost = Math.ceil(numberPost/4);
+                    }
+
+                     for(var i = 0; i < numberPost; i++) {
                         str += '<li class="page-item"><a class="page-link" id="' + i + '" onclick="ajaxPost(this)">' + i + '</a></li>' 
                      }
                      
@@ -22,5 +28,8 @@ $(document).ready(function() {
                      
                      $("#pagination").html(str);    
                 }
-            });        
-});
+            });  
+
+
+
+}

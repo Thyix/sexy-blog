@@ -1,9 +1,7 @@
-function ajaxPost(obj) {      
-    var postPerPage = 4;
-    
+function postHandler(pageNumber, postPerPage) {     
     $.post(
-        "ajaxLoadPost.jsp",
-        {pageNumber: obj.id, postPerPage: postPerPage},
+        "Post/postLoader.jsp",
+        {pageNumber: pageNumber, postPerPage: postPerPage},
         function(data) { 
             $("#posts").html(""); // remove current posts
             
@@ -18,7 +16,7 @@ function ajaxPost(obj) {
                                          '<p class="card-text mb-auto">content_post</p>' +
                                          '<a href="#">Continue reading</a>' +
                                        '</div>' +
-                                       '<img class="card-img-right flex-auto d-none d-lg-block" style="width:200px;height:200px" src="../arch.png" alt="Card image cap">' +                                     
+                                       '<img class="card-img-right flex-auto d-none d-lg-block" style="width:200px;height:200px" src="pictureURL_post" alt="Card image cap">' +                                     
                                      '</div>' + 
                                 '</div>';   
                        
@@ -29,8 +27,10 @@ function ajaxPost(obj) {
                         }
                         
                         var res = block.replace("title_post", data[i].title_post);
-                        res = block.replace("date_post", data[i].date_post);
-                        res = block.replace("content_post", data[i].content_post);                        
+                        res = res.replace("date_post", data[i].date_post);
+                        res = res.replace("content_post", data[i].content_post);
+                        res = res.replace("pictureURL_post", data[i].pictureURL_post);
+                        
                         row += res;
                         
                         if (i % 2 === 1 || i === data.length - 1) { // if number of post into the row is even or is the last one and the total is odd 
