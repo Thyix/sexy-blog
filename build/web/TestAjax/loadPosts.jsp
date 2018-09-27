@@ -19,8 +19,12 @@
     String password = "";     
     connection = DriverManager.getConnection(url, username, password);             
 %>
+<<<<<<< HEAD
 <%
     // TO READ https://hackernoon.com/guys-were-doing-pagination-wrong-f6c18a91b232
+=======
+<% 
+>>>>>>> master
     int nbPage = Integer.parseInt(request.getParameter("page")) * 4;
     pst = connection.prepareCall("SELECT * FROM post LIMIT " + String.valueOf(nbPage) + ",4");
     rs = pst.executeQuery();
