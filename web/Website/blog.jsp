@@ -21,12 +21,17 @@
 
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
-    <link href="blog.css" rel="../stylesheet">
+    <link href="CSS/blog.css" rel="../stylesheet">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
-    <script src="loadPosts.js" type="text/javascript"></script> 
-    <script src="loadPagination.js" type="text/javascript"></script> 
-    <script src="paginationOnClick.js" type="text/javascript"></script> 
+   
+    <script src="Pagination/paginationHandler.js" type="text/javascript"></script>    
+    <script src="Pagination/readyLoadPagination.js" type="text/javascript"></script> 
+       
+    <script src="Post/postHandler.js" type="text/javascript"></script>
+    <script src="Post/ajaxLoadPost.js" type="text/javascript"></script>    
+    <script src="Post/readyLoadPost.js" type="text/javascript"></script> 
+    
   </head>   
     <body>
          <div class="container">

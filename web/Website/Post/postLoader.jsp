@@ -19,9 +19,11 @@
     connection = DriverManager.getConnection(url, username, password);             
 %>
 <%
-    // TO READ https://hackernoon.com/guys-were-doing-pagination-wrong-f6c18a91b232
-    int nbPage = Integer.parseInt(request.getParameter("page")) * 4;
-    pst = connection.prepareCall("SELECT * FROM post LIMIT " + String.valueOf(nbPage) + ",4");
+    String pageNumber = request.getParameter("pageNumber");
+    String postPerPage = request.getParameter("postPerPage");
+    int firstPostIndex = Integer.parseInt(pageNumber) * Integer.parseInt(postPerPage);
+    String query = String.format("SELECT * FROM post LIMIT %s, %s", firstPostIndex, postPerPage);
+    pst = connection.prepareCall(query);
     rs = pst.executeQuery();
 %>
 <%
