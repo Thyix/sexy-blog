@@ -16,6 +16,51 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <link href="blog.css" rel="stylesheet">
   </head>
+  
+<%@page import="org.json.JSONArray"%>
+<%@page contentType="application/json" pageEncoding="UTF-8"%>
+<%@page import="org.json.JSONObject"%>
+<%@ page import = "java.sql.*" %>
+<%@ page import = "java.util.logging.Logger" %>
+<%@ page import = "java.util.logging.Level" %>      
+<%          
+    Connection connection;
+    PreparedStatement pst;
+    ResultSet rs;  
+    // Load the JDBC driver      
+    Class.forName("com.mysql.jdbc.Driver").newInstance(); 
+    String serverName = "localhost";      
+    String mydatabase = "sexy-blog";      
+    String url = "jdbc:mysql://" + serverName + "/" + mydatabase + "?verifyServerCertificate=false&useSSL=false&serverTimezone=UTC"; // a JDBC url      
+    String username = "root";      
+    String password = "";     
+    connection = DriverManager.getConnection(url, username, password);             
+%>
+<%
+    String pageNumber = request.getParameter("name");
+    //int firstPostIndex = Integer.parseInt(pageNumber) * Integer.parseInt(postPerPage);
+    //String query = String.format("SELECT * FROM post LIMIT %s, %s", firstPostIndex, postPerPage);
+    String query = "TESTQUERY";
+    
+    pst = connection.prepareCall(query);
+    rs = pst.executeQuery();
+%>
+<%
+    //https://docs.oracle.com/javaee/7/api/javax/json/JsonObject.html
+    JSONArray array = new JSONArray();
+    while (rs.next()) {        
+        JSONObject element = new JSONObject();
+        element.put("id_user", rs.getString("id_user"));
+        element.put("username_user", rs.getString("username_user"));
+        element.put("password_user", rs.getString("password_user"));
+        element.put("email_user", rs.getString("email_user"));
+        element.put("connected_user", rs.getString("connected_user"));
+        array.put(element);
+    }
+      
+    out.print(array);
+    out.flush();
+%>
 
   <body>
 
@@ -53,7 +98,7 @@
                             </div>
                             <div class="checkbox">
                                 <label>
-                                <input style="margin-left: 35px;" type="checkbox"> Rester connecté
+                                <input style="margin-left: 35px;" type="checkbox"> Rester connectÃ©
                                 </label>
                             </div>
                         </form>
@@ -71,14 +116,14 @@
                                 <label class="sr-only" for="exampleInputPassword2">Mot de passe</label>
                                 <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Mot de passe" required>
                                 <div class="help-block text-right">
-                                    <a href="" style="margin-right: 25px;">Mot de passe oublié ?</a></div>
+                                    <a href="" style="margin-right: 25px;">Mot de passe oubliÃ© ?</a></div>
                             </div>
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
                                 <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                <input style="margin-left: 35px;" type="checkbox"> Rester connecté
+                                <input style="margin-left: 35px;" type="checkbox"> Rester connectÃ©
                                 </label>
                             </div>
                         </form>
