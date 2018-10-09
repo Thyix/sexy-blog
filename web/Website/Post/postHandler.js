@@ -1,7 +1,7 @@
-function postHandler(pageNumber, postPerPage) {     
+function postHandler(pageNumber, postPerPage, tag) {     
     $.post(
         "Post/postLoader.jsp",
-        {pageNumber: pageNumber, postPerPage: postPerPage},
+        {pageNumber: pageNumber, postPerPage: postPerPage, categoryId: tag},
         function(data) { 
             $("#posts").html(""); // remove current posts
             

@@ -20,7 +20,14 @@
     connection = DriverManager.getConnection(url, username, password);             
 %>
 <%
-    pst = connection.prepareCall("SELECT count(*) FROM post");
+    String categoryId = request.getParameter("categoryId");
+    
+     if(categoryId != null && !categoryId.isEmpty()) {
+      pst = connection.prepareCall(String.format("SELECT count(*) FROM post WHERE id_tag = %s", categoryId));
+    } else {
+      pst = connection.prepareCall("SELECT count(*) FROM post");
+    }
+    
     rs = pst.executeQuery();
     rs.first();
     

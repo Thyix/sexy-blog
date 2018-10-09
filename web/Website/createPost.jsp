@@ -46,7 +46,7 @@
             
           </div>
           <div class="col-4 text-center">
-            <a class="blog-header-logo text-dark" href="#">Sexy-blog</a>
+            <a class="blog-header-logo text-dark" href="blog.jsp">Sexy-blog</a>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
                          
@@ -60,7 +60,7 @@
       </header>
 
       <div class="nav-scroller py-1 mb-2">
-        <nav class="nav d-flex justify-content-between" id="tag_category_tag" id="tag_category_tag">
+        <nav class="nav d-flex justify-content-between" id="tag_category" id="tag_category">
             
         </nav>
       </div>
@@ -69,10 +69,10 @@
         <%-- tag picker https://www.jqueryscript.net/form/Dynamic-jQuery-Multi-Select-Tags-Input-Plugin-Fast-Select.html --%>
                 
         <label>Title</label>
-        <input class="form-control" type="text" id="title_post" name="title_post"><br>
+        <input class="form-control" type="text" id="title_post" name="title_post" required><br>
                     
         <label>Date</label>
-        <input type="text" class="form-control" id="date_post" name="date_post"><br>
+        <input type="text" class="form-control" id="date_post" name="date_post" required><br>
         
         <label >Tag</label>
         <select class="form-control" id="tag_post" name="tag_post">

@@ -1,6 +1,7 @@
-function paginationHandler(){
+function paginationHandler(id){
     $.post({
                 url: "Pagination/paginationLoader.jsp",
+                data: {categoryId: id}, 
                 success: function(response) {
                     var str = '<nav aria-label="Page navigation example">' +
                                 '<ul class="pagination justify-content-center">' +
@@ -29,7 +30,4 @@ function paginationHandler(){
                      $("#pagination").html(str);    
                 }
             });  
-
-
-
 }

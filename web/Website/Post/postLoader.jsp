@@ -22,12 +22,21 @@
 <%
     String pageNumber = request.getParameter("pageNumber");
     String postPerPage = request.getParameter("postPerPage");
+    
+    String categoryId = request.getParameter("categoryId");
+ 
     int firstPostIndex = Integer.parseInt(pageNumber) * Integer.parseInt(postPerPage);
-    String query = String.format("SELECT * FROM post LIMIT %s, %s", firstPostIndex, postPerPage);
+    String query = "";
+    
+    if(categoryId != null && !categoryId.isEmpty()) {
+       query = String.format("SELECT * FROM post WHERE id_tag=%s ORDER BY date_post DESC LIMIT %s, %s", categoryId, firstPostIndex, postPerPage);
+    } else {
+       query = String.format("SELECT * FROM post ORDER BY date_post DESC LIMIT %s, %s", firstPostIndex, postPerPage);      
+    }
+    
     pst = connection.prepareCall(query);
     rs = pst.executeQuery();
-%>
-<%
+    
     //https://docs.oracle.com/javaee/7/api/javax/json/JsonObject.html
     JSONArray array = new JSONArray();
     while (rs.next()) {  
@@ -39,7 +48,7 @@
         element.put("pictureURL_post", rs.getString("pictureURL_post"));
         array.put(element);
     }
-
+    
     out.print(array);
     out.flush();
 %>

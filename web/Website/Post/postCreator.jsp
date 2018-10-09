@@ -28,6 +28,7 @@
     String pictureURL = request.getParameter("pictureURL_post");
 %>
 <%
+    
     //  TODO insert id_tag
     String query = "INSERT INTO post (date_post, title_post, content_post, pictureURL_post, id_tag) VALUES(?, ?, ?, ?, ?)";
     pst = connection.prepareStatement(query, 1005, 1008);
@@ -38,10 +39,12 @@
     pst.setString(2, title);           
     pst.setString(3, content);
     pst.setString(4, pictureURL);
-    //  TODO change hardcoded value
-    pst.setInt(5, Integer.parseInt("9"));
+    pst.setInt(5, Integer.parseInt(tag));
     
     pst.executeUpdate(); 
+
+    // change for last url
+    response.sendRedirect(request.getHeader("Referer"));
 %>
 <%!
     public java.sql.Date convertDate(String receivedDate) {
