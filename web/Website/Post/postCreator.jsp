@@ -43,6 +43,8 @@
     
     pst.executeUpdate(); 
 
+    pst.close();
+    connection.close();
     // change for last url
     response.sendRedirect(request.getHeader("Referer"));
 %>

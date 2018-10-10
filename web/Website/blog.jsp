@@ -25,12 +25,18 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
    
+     <script src="../JS/fonctionUtilitaire.js" type="text/javascript"></script>
+     
+    <script src="fastselect.standalone.js"></script> 
+     
     <script src="Pagination/paginationHandler.js" type="text/javascript"></script>    
     <script src="Pagination/readyLoadPagination.js" type="text/javascript"></script> 
-       
+    <script src="Tag/readyLoadTag.js" type="text/javascript"></script> 
+    
     <script src="Post/postHandler.js" type="text/javascript"></script>
     <script src="Post/ajaxLoadPost.js" type="text/javascript"></script>    
     <script src="Post/readyLoadPost.js" type="text/javascript"></script> 
+    <script src="Post/openPost.js" type="text/javascript"></script> 
     
   </head>   
     <body>
@@ -38,21 +44,12 @@
       <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <a class="text-muted" href="#">Subscribe</a>
+            
           </div>
-          <div class="col-4 text-center">
-            <a class="blog-header-logo text-dark" href="#">Large</a>
+         <div class="col-4 text-center">
+            <a class="blog-header-logo text-dark" href="blog.jsp">Sexy-blog</a>
           </div>
-          <div class="col-4 d-flex justify-content-end align-items-center">
-            <a class="text-muted" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
-            </a>                  
-            <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
-                Sign Up
-            </button>
-            <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
-                Sign In
-            </button>
+          <div class="col-4 d-flex justify-content-end align-items-center">                                  
         </div>
       </header>
 
@@ -60,14 +57,6 @@
         <nav class="nav d-flex justify-content-between" id="tag_category" id="tag_category">
      
         </nav>
-      </div>
-
-      <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
-        <div class="col-md-6 px-0">
-          <h1 class="display-4 font-italic">Title of a longer featured blog post</h1>
-          <p class="lead my-3">Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.</p>
-          <p class="lead mb-0"><a href="post_test.html" class="text-white font-weight-bold">Continue reading...</a></p>
-        </div>
       </div>
         <div id="posts" name="posts">
            

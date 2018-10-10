@@ -33,6 +33,11 @@
     
     JSONObject element = new JSONObject();
     element.put("count_post", rs.getString((1)));
+    
+    rs.close();
+    pst.close();
+    connection.close();
+    
     out.print(element);
     out.flush();
 %>

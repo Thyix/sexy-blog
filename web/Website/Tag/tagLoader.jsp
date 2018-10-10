@@ -34,6 +34,10 @@
         array.put(element);
     }
 
+    rs.close();
+    pst.close();
+    connection.close();
+    
     out.print(array);
     out.flush();
 %>

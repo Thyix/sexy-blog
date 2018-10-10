@@ -27,6 +27,8 @@
        
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
       
+    <script src="../JS/fonctionUtilitaire.js" type="text/javascript"></script>
+     
     <script src="fastselect.standalone.js"></script> 
      
     <script src="Pagination/paginationHandler.js" type="text/javascript"></script>    
@@ -36,7 +38,7 @@
     <script src="Post/postHandler.js" type="text/javascript"></script>
     <script src="Post/ajaxLoadPost.js" type="text/javascript"></script>    
     <script src="Post/readyLoadPost.js" type="text/javascript"></script> 
-    
+    <script src="Post/openPost.js" type="text/javascript"></script> 
   </head>   
     <body>
          <div class="container">
@@ -45,17 +47,10 @@
           <div class="col-4 pt-1">
             
           </div>
-          <div class="col-4 text-center">
+         <div class="col-4 text-center">
             <a class="blog-header-logo text-dark" href="blog.jsp">Sexy-blog</a>
           </div>
-          <div class="col-4 d-flex justify-content-end align-items-center">
-                         
-            <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
-                Sign Up
-            </button>
-            <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom">
-                Sign In
-            </button>
+          <div class="col-4 d-flex justify-content-end align-items-center">                                  
         </div>
       </header>
 
@@ -65,7 +60,7 @@
         </nav>
       </div>
 
-    <form action="Post/postCreator.jsp" method="post">
+    <form action="Post/postCreator.jsp" method="get">
         <%-- tag picker https://www.jqueryscript.net/form/Dynamic-jQuery-Multi-Select-Tags-Input-Plugin-Fast-Select.html --%>
                 
         <label>Title</label>

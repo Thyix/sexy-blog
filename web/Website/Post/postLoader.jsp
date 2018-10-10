@@ -29,9 +29,9 @@
     String query = "";
     
     if(categoryId != null && !categoryId.isEmpty()) {
-       query = String.format("SELECT * FROM post WHERE id_tag=%s ORDER BY date_post DESC LIMIT %s, %s", categoryId, firstPostIndex, postPerPage);
+       query = String.format("SELECT * FROM post JOIN tag WHERE post.id_tag=%s and post.id_tag = tag.id_tag ORDER BY date_post DESC LIMIT %s, %s", categoryId, firstPostIndex, postPerPage);
     } else {
-       query = String.format("SELECT * FROM post ORDER BY date_post DESC LIMIT %s, %s", firstPostIndex, postPerPage);      
+       query = String.format("SELECT * FROM post JOIN tag where post.id_tag = tag.id_tag ORDER BY date_post DESC LIMIT %s, %s", firstPostIndex, postPerPage);      
     }
     
     pst = connection.prepareCall(query);
@@ -46,8 +46,15 @@
         element.put("title_post", rs.getString("title_post"));
         element.put("content_post", rs.getString("content_post"));
         element.put("pictureURL_post", rs.getString("pictureURL_post"));
+        
+        element.put("name_tag", rs.getString("name_tag"));
+        
         array.put(element);
     }
+    
+    rs.close();
+    pst.close();
+    connection.close();
     
     out.print(array);
     out.flush();

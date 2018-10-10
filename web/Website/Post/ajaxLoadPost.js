@@ -1,9 +1,6 @@
 function ajaxPost(obj) {         
-    var url_string = window.location.href;
-    var url = new URL(url_string);
-    var id = url.searchParams.get("categoryId");
-    
-    postHandler(obj.id, 4, id);   
+    var id = getParameterUrl("categoryId");
+    postHandler(obj.id, 5, id);   
 }
 
 function ajaxCategory(obj) {
