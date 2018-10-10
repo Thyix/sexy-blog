@@ -17,9 +17,6 @@
     <link href="blog.css" rel="stylesheet">
   </head>
   
-<%@page import="org.json.JSONArray"%>
-<%@page contentType="application/json" pageEncoding="UTF-8"%>
-<%@page import="org.json.JSONObject"%>
 <%@ page import = "java.sql.*" %>
 <%@ page import = "java.util.logging.Logger" %>
 <%@ page import = "java.util.logging.Level" %>      
@@ -37,29 +34,32 @@
     connection = DriverManager.getConnection(url, username, password);             
 %>
 <%
-    String pageNumber = request.getParameter("name");
-    //int firstPostIndex = Integer.parseInt(pageNumber) * Integer.parseInt(postPerPage);
+    String signupName = request.getParameter("signupName");
+    if (!signupName.isEmpty()) {
+        String signupEmail = request.getParameter("signupEmail");
+        String signupPassword = request.getParameter("signupPassword");
+    }
     //String query = String.format("SELECT * FROM post LIMIT %s, %s", firstPostIndex, postPerPage);
-    String query = "TESTQUERY";
+    //String query = "TESTQUERY";
     
-    pst = connection.prepareCall(query);
-    rs = pst.executeQuery();
+    //pst = connection.prepareCall(query);
+   // rs = pst.executeQuery();
 %>
 <%
     //https://docs.oracle.com/javaee/7/api/javax/json/JsonObject.html
-    JSONArray array = new JSONArray();
-    while (rs.next()) {        
-        JSONObject element = new JSONObject();
-        element.put("id_user", rs.getString("id_user"));
-        element.put("username_user", rs.getString("username_user"));
-        element.put("password_user", rs.getString("password_user"));
-        element.put("email_user", rs.getString("email_user"));
-        element.put("connected_user", rs.getString("connected_user"));
-        array.put(element);
-    }
+    //JSONArray array = new JSONArray();
+    //while (rs.next()) {        
+        //JSONObject element = new JSONObject();
+        //element.put("id_user", rs.getString("id_user"));
+        //element.put("username_user", rs.getString("username_user"));
+        //element.put("password_user", rs.getString("password_user"));
+        //element.put("email_user", rs.getString("email_user"));
+       // element.put("connected_user", rs.getString("connected_user"));
+       // array.put(element);
+    //}
       
-    out.print(array);
-    out.flush();
+    //out.print(array);
+   // out.flush();
 %>
 
   <body>
@@ -74,31 +74,28 @@
             <a class="blog-header-logo text-dark" href="#">Large</a>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
-            <a class="text-muted" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mx-3"><circle cx="10.5" cy="10.5" r="7.5"></circle><line x1="21" y1="21" x2="15.8" y2="15.8"></line></svg>
-            </a>
               <div>
               <button id="inscription" type="button" style="margin-right: 15px" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" data-placement="bottom" title="Nouveau compte">S'inscrire</button>
               <ul id="signup-nav" class="dropdown-menu">
-                    <li><form id="register" class="registerForm" role="form" method="post" action="signup" accept-charset="UTF-8" id="signup-nav">
+                    <li><form id="register" class="registerForm" role="form" method="post" action="login.jsp" accept-charset="UTF-8" id="signup-nav">
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
                                 <label class="sr-only" for="exampleInputName">Nom complet</label>
-                                <input type="name" class="form-control" id="exampleInputPassword" placeholder="Nom complet" required>
+                                <input type="signupName" name="signupName" class="form-control" id="signupName" placeholder="Nom complet" required>
                             </div>
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
                                 <label class="sr-only" for="exampleInputEmail2"> Votre e-mail</label>
-                                <input type="email" class="form-control" id="exampleInputEmail" placeholder="Adresse Mail" required>
+                                <input type="signupEmail" name="signupEmail" class="form-control" id="signupEmail" placeholder="Adresse Mail" required>
                             </div>
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
                                 <label class="sr-only" for="exampleInputPassword2">Nouveau mot de passe</label>
-                                <input type="password" class="form-control" id="exampleInputPassword" placeholder="Mot de passe" required>
+                                <input type="signupPassword" name="signupPassword" class="form-control" id="signupPassword" placeholder="Mot de passe" required>
                             </div>
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
                                 <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                <input style="margin-left: 35px;" type="checkbox"> Rester connectÃ©
+                                <input style="margin-left: 35px;" type="checkbox"> Rester connecté
                                 </label>
                             </div>
                         </form>
@@ -116,14 +113,14 @@
                                 <label class="sr-only" for="exampleInputPassword2">Mot de passe</label>
                                 <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Mot de passe" required>
                                 <div class="help-block text-right">
-                                    <a href="" style="margin-right: 25px;">Mot de passe oubliÃ© ?</a></div>
+                                    <a href="" style="margin-right: 25px;">Mot de passe oublié ?</a></div>
                             </div>
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
                                 <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                <input style="margin-left: 35px;" type="checkbox"> Rester connectÃ©
+                                <input style="margin-left: 35px;" type="checkbox"> Rester connecté
                                 </label>
                             </div>
                         </form>

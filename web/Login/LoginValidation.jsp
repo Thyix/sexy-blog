@@ -1,3 +1,6 @@
+<%@page import="org.json.JSONArray"%>
+<%@page contentType="application/json" pageEncoding="UTF-8"%>
+<%@page import="org.json.JSONObject"%>
 <%@ page import = "java.sql.*" %>
 <%@ page import = "java.util.logging.Logger" %>
 <%@ page import = "java.util.logging.Level" %>
@@ -46,7 +49,7 @@
                     "");
             return conn;
         } catch (Exception e) {
-            System.out.print("La connexion n'a pas pu être établie !");
+            System.out.print("La connexion n'a pas pu Ãªtre Ã©tablie !");
             return null;
         }
     }
@@ -57,10 +60,9 @@
         try {
             date = simpleDate.parse(receivedDate);
         } catch (Exception e) {
-            System.out.print("La conversion n'a pas fonctionnée.");
+            System.out.print("La conversion n'a pas fonctionnÃ©e.");
             return null;
         }
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         return sqlDate;
     }
-%>
