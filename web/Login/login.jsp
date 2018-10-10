@@ -14,30 +14,30 @@
 
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link href="LoginValidation.jsp">
     <link href="blog.css" rel="stylesheet">
   </head>
   
 <%@ page import = "java.sql.*" %>
 <%@ page import = "java.util.logging.Logger" %>
-<%@ page import = "java.util.logging.Level" %>      
+<%@ page import = "java.util.logging.Level" %>
+<%@page import="java.text.SimpleDateFormat"%>
+
 <%          
     Connection connection;
     PreparedStatement pst;
-    ResultSet rs;  
-    // Load the JDBC driver      
-    Class.forName("com.mysql.jdbc.Driver").newInstance(); 
-    String serverName = "localhost";      
-    String mydatabase = "sexy-blog";      
-    String url = "jdbc:mysql://" + serverName + "/" + mydatabase + "?verifyServerCertificate=false&useSSL=false&serverTimezone=UTC"; // a JDBC url      
-    String username = "root";      
-    String password = "";     
-    connection = DriverManager.getConnection(url, username, password);             
+    ResultSet rs;
+    connection  = connectToBD();
 %>
 <%
     String signupName = request.getParameter("signupName");
-    if (!signupName.isEmpty()) {
+    //Connection conn = connectToBD();
+    if (signupName != null) {
         String signupEmail = request.getParameter("signupEmail");
         String signupPassword = request.getParameter("signupPassword");
+        String signupUsername = request.getParameter("signupName");
+        boolean test = SignIn(signupUsername, signupPassword, signupEmail);
+        int untest = 1;
     }
     //String query = String.format("SELECT * FROM post LIMIT %s, %s", firstPostIndex, postPerPage);
     //String query = "TESTQUERY";
@@ -184,99 +184,6 @@
         </div>
       </div>
         
-      <div class="row mb-2">
-        <div class="col-md-6">
-          <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-primary">World</strong>
-              <h3 class="mb-0">
-                <a class="text-dark" href="#">Featured post</a>
-              </h3>
-              <div class="mb-1 text-muted">Nov 12</div>
-              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <a href="#">Continue reading</a>
-            </div>
-            <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-success">Design</strong>
-              <h3 class="mb-0">
-                <a class="text-dark" href="#">Post title</a>
-              </h3>
-              <div class="mb-1 text-muted">Nov 11</div>
-              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <a href="#">Continue reading</a>
-            </div>
-            <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
-          </div>
-        </div>
-      </div>
-      
-      <div class="row mb-2">
-        <div class="col-md-6">
-          <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-primary">World</strong>
-              <h3 class="mb-0">
-                <a class="text-dark" href="#">Featured post</a>
-              </h3>
-              <div class="mb-1 text-muted">Nov 12</div>
-              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <a href="#">Continue reading</a>
-            </div>
-            <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-success">Design</strong>
-              <h3 class="mb-0">
-                <a class="text-dark" href="#">Post title</a>
-              </h3>
-              <div class="mb-1 text-muted">Nov 11</div>
-              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <a href="#">Continue reading</a>
-            </div>
-            <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
-          </div>
-        </div>
-      </div>
-      
-      <div class="row mb-2">
-        <div class="col-md-6">
-          <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-primary">World</strong>
-              <h3 class="mb-0">
-                <a class="text-dark" href="#">Featured post</a>
-              </h3>
-              <div class="mb-1 text-muted">Nov 12</div>
-              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <a href="#">Continue reading</a>
-            </div>
-            <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="card flex-md-row mb-4 shadow-sm h-md-250">
-            <div class="card-body d-flex flex-column align-items-start">
-              <strong class="d-inline-block mb-2 text-success">Design</strong>
-              <h3 class="mb-0">
-                <a class="text-dark" href="#">Post title</a>
-              </h3>
-              <div class="mb-1 text-muted">Nov 11</div>
-              <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-              <a href="#">Continue reading</a>
-            </div>
-            <img class="card-img-right flex-auto d-none d-lg-block" data-src="holder.js/200x250?theme=thumb" alt="Card image cap">
-          </div>
-        </div>
-      </div>
-    </div>
 
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
@@ -298,6 +205,57 @@
         <a href="#">Back to top</a>
       </p>
     </footer>
+            
+    <%!
+    public Connection connectToBD() {
+        Connection conn = null; 
+        try {
+           Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+           conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost/sexy-blog?verifyServerCertificate=false&useSSL=false&serverTimezone=UTC" + 
+                    "&user=" +
+                    "root" + 
+                    "&password=" +
+                    "");
+            return conn;
+        } catch (Exception e) {
+            System.out.print("La connexion n'a pas pu être établie !");
+            return null;
+        }
+    }
+
+    public boolean SignIn(String username, String password, String email) {
+        PreparedStatement pst; 
+        ResultSet rs;
+        Connection conn = connectToBD();
+        int randomID = (int)Math.floor((Math.random() * 1000) + 1); ;
+        String query = "INSERT INTO user (id_user, username_user, password_user, email_user) VALUES (?, ?, ?, ?)";
+        try {
+            pst = conn.prepareStatement(query, 1005, 1008);
+            pst.clearParameters();
+            pst.setInt(1, randomID);
+            pst.setString(2, username);           
+            pst.setString(3, password);
+            pst.setString(4, email);
+            pst.executeUpdate();
+        } catch (Exception e) {
+            System.out.print("Erreur lors de l'enregistrement : " + e);
+        }
+        return true;
+    }
+    public java.sql.Date convertDate(String receivedDate) {
+        SimpleDateFormat simpleDate = new SimpleDateFormat("MM-dd-yyyy");
+        java.util.Date date = null;
+        try {
+            date = simpleDate.parse(receivedDate);
+        } catch (Exception e) {
+            System.out.print("La conversion n'a pas fonctionnée.");
+            return null;
+        }
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        return sqlDate;
+    }
+    %>
     
     <!-- Bootstrap core JavaScript
     ================================================== -->

@@ -1,39 +1,7 @@
-<%@page import="org.json.JSONArray"%>
-<%@page contentType="application/json" pageEncoding="UTF-8"%>
-<%@page import="org.json.JSONObject"%>
 <%@ page import = "java.sql.*" %>
 <%@ page import = "java.util.logging.Logger" %>
 <%@ page import = "java.util.logging.Level" %>
 <%@page import="java.text.SimpleDateFormat"%>
-<%          
-    Connection connection;
-    PreparedStatement pst;
-    ResultSet rs;  
-
-    // Load the JDBC driver      
-    Class.forName("com.mysql.jdbc.Driver").newInstance(); 
-    Connection conn = connectToBD();
-%>
-<%
-    pst = conn.prepareCall("SELECT * FROM post");
-    rs = pst.executeQuery();
-%>
-<%
-    //https://docs.oracle.com/javaee/7/api/javax/json/JsonObject.html
-    JSONArray array = new JSONArray();
-    while (rs.next()) {  
-        JSONObject element = new JSONObject();
-        element.put("id_post", rs.getString("id_post"));
-        element.put("date_post", rs.getString("date_post"));
-        element.put("title_post", rs.getString("title_post"));
-        element.put("content_post", rs.getString("content_post"));
-        element.put("pictureURL_post", rs.getString("pictureURL_post"));
-        array.put(element);
-    }
-
-    out.print(array.toString());
-    out.flush();
-%>
 
 <%!
     ResultSet rs = null;
@@ -49,18 +17,32 @@
                     "");
             return conn;
         } catch (Exception e) {
-            System.out.print("La connexion n'a pas pu Ãªtre Ã©tablie !");
+            System.out.print("La connexion n'a pas pu être établie !");
             return null;
         }
     }
 
+    public boolean SignIn(String username, String password, String email) {
+        PreparedStatement pst; 
+        ResultSet rs;
+        Connection conn = connectToBD();
+        int randomID = (int)Math.random() % 3;
+        String query = String.format("INSERT INTO user (id_user, username_user, password_user, email_user) VALUES (%s, %s, %s, %s)",
+            randomID, username, password, email);
+        try {
+            pst = conn.prepareCall(query);
+            rs = pst.executeQuery();
+        } catch (Exception e) {
+            alert(e);
+        }
+    }
     public java.sql.Date convertDate(String receivedDate) {
         SimpleDateFormat simpleDate = new SimpleDateFormat("MM-dd-yyyy");
         java.util.Date date = null;
         try {
             date = simpleDate.parse(receivedDate);
         } catch (Exception e) {
-            System.out.print("La conversion n'a pas fonctionnÃ©e.");
+            System.out.print("La conversion n'a pas fonctionnée.");
             return null;
         }
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
