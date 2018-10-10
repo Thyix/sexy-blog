@@ -20,12 +20,24 @@
     connection = DriverManager.getConnection(url, username, password);             
 %>
 <%
-    pst = connection.prepareCall("SELECT count(*) FROM post");
+    String categoryId = request.getParameter("categoryId");
+    
+     if(categoryId != null && !categoryId.isEmpty()) {
+      pst = connection.prepareCall(String.format("SELECT count(*) FROM post WHERE id_tag = %s", categoryId));
+    } else {
+      pst = connection.prepareCall("SELECT count(*) FROM post");
+    }
+    
     rs = pst.executeQuery();
     rs.first();
     
     JSONObject element = new JSONObject();
     element.put("count_post", rs.getString((1)));
+    
+    rs.close();
+    pst.close();
+    connection.close();
+    
     out.print(element);
     out.flush();
 %>

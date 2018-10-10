@@ -19,10 +19,16 @@
     String password = "";     
     connection = DriverManager.getConnection(url, username, password);             
 %>
+<<<<<<< HEAD:web/TestAjax/loadPosts.jsp
 <%
     // TO READ https://hackernoon.com/guys-were-doing-pagination-wrong-f6c18a91b232
     int nbPage = Integer.parseInt(request.getParameter("page")) * 4;
     pst = connection.prepareCall("SELECT * FROM post LIMIT " + String.valueOf(nbPage) + ",4");
+=======
+<%  
+    String query = String.format("SELECT * FROM tag");
+    pst = connection.prepareCall(query);
+>>>>>>> Pascal:web/Website/Tag/tagLoader.jsp
     rs = pst.executeQuery();
 %>
 <%
@@ -30,14 +36,19 @@
     JSONArray array = new JSONArray();
     while (rs.next()) {        
         JSONObject element = new JSONObject();
-        element.put("id_post", rs.getString("id_post"));
-        element.put("date_post", rs.getString("date_post"));
-        element.put("title_post", rs.getString("title_post"));
-        element.put("content_post", rs.getString("content_post"));
-        element.put("pictureURL_post", rs.getString("pictureURL_post"));
+        element.put("id_tag", rs.getString("id_tag"));
+        element.put("name_tag", rs.getString("name_tag"));       
         array.put(element);
     }
+<<<<<<< HEAD:web/TestAjax/loadPosts.jsp
       
+=======
+
+    rs.close();
+    pst.close();
+    connection.close();
+    
+>>>>>>> Pascal:web/Website/Tag/tagLoader.jsp
     out.print(array);
     out.flush();
 %>
