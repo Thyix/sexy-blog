@@ -44,7 +44,8 @@
       <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-              <a href="createPost.jsp" class="blog-header-logo text-dark">Create post (TODO Will show only when sign in)</a>
+              <a href="createPost.jsp" class="blog-header-logo text-dark">Create</a>
+              <a href="modDeleteExemple.jsp" class="blog-header-logo text-dark">Modify/Delete</a>
           </div>
          <div class="col-4 text-center">
             <a class="blog-header-logo text-dark" href="blog.jsp">Sexy-blog</a>

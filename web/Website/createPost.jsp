@@ -60,7 +60,7 @@
         </nav>
       </div>
 
-    <form action="Post/postCreator.jsp" method="get">
+    <form action="Post/postCreator.jsp" method="post">
         <%-- tag picker https://www.jqueryscript.net/form/Dynamic-jQuery-Multi-Select-Tags-Input-Plugin-Fast-Select.html --%>
                 
         <label>Title</label>

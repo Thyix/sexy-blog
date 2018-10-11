@@ -18,8 +18,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-     
+
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <link href="../CSS/blog.css" rel="../stylesheet">
@@ -60,24 +59,31 @@
             
         </nav>
       </div>
-             
-            <div id="table_post">
-                <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Tag</th>
-                    <th scope="col">Mod/Del</th>
-                  </tr>
-                </thead>
-                <tbody id="body_post">
-                  
-                </tbody>
-              </table>
-            </div>
-  
+
+    <form action="Post/postUpdate.jsp" method="post" id="form_post">
+        <%-- tag picker https://www.jqueryscript.net/form/Dynamic-jQuery-Multi-Select-Tags-Input-Plugin-Fast-Select.html --%>
+                
+        <label>Title</label>
+        <input class="form-control" type="text" id="title_post" name="title_post" required><br>
+                    
+        <label>Date</label>
+        <input type="text" class="form-control" id="date_post" name="date_post" required><br>
+        
+        <label >Tag</label>
+        <select class="form-control" id="tag_post" name="tag_post">
+        </select><br>
+        
+        <div class="form-group">
+          <label >Content</label>
+          <textarea class="form-control" id="content_post" name="content_post" rows="3"></textarea>
+        </div><br>
+        
+        <label>Picture url</label>
+        <input class="form-control" type="text" id="pictureURL_post" name="pictureURL_post"><br>
+        
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Update post</button>
+    </form>      
+        
      <footer class="blog-footer">  
 
     </footer>
@@ -100,68 +106,32 @@
         text: 'Thumbnail'
       });
     </script>
-       
-    <!-- load existing post from author -->
-     <script>
+    
+    <script>
         $(document).ready(function() {
-               refreshTable();
+               var id = getParameterUrl("postId");
+               $.post(
+                    "Post/modifyPost.jsp",
+                    {idPost: id},
+                    function(data) {
+                        // TODO ouvrir la page de modification (identique à la création) en passant l'id du post à modifier pour remplir les éléments                       
+                        $("#title_post").val(data.title_post);   
+                        // format goal "MM/dd/yyyy"
+                        
+                        var date_str = data.date_post;
+                        var date = date_str.replace(/(\d{4})-(\d{2})-(\d{2})/, "$2/$3/$1");
+                        
+                        $("#date_post").val(date);
+                        $("#tag_post").val(data.id_tag);
+                        $("#content_post").val(data.content_post);
+                        $("#pictureURL_post").val(data.pictureURL_post);
+                    }
+                    );  
+                
+                // ugly fix to send id_post when update is submit
+                $("#form_post").append('<input type="hidden" name="id_post" value="' + id +'" />');               
         });    
     </script>
     
-    <script>
-        function modifyPost(obj) { 
-            window.location.href = "updatePost.jsp?postId="+obj.id;                  
-        }
-    </script>
-    <script>
-        function deletePost(obj) {
-            // TODO appeler la bd pour supprimer le post avec l'id spécifique
-            $.post(
-                    "Post/deletePost.jsp",
-                    {idPost: obj.id},
-                    function() {
-                        refreshTable();           
-                    }
-                    );          
-        }
-    </script>   
-    <script>
-        function refreshTable() {
-            $("#body_post").html("");
-            
-            var postTemplate =  '<tr>' +
-                                    '<th scope="row">id_post</th>' +
-                                    '<td>title_post</td>' +
-                                    '<td>date_post</td>' +
-                                    '<td>tag_post</td>' +
-                                    '<td>' + 
-                                        '<a id="id_post" onclick="modifyPost(this)" style="padding-right: 5px;">' +
-                                            '<span class="glyphicon glyphicon-pencil"></span>' +
-                                        '</a>' +
-                                        '<a id="id_post" onclick="deletePost(this)">' +
-                                            '<span class="glyphicon glyphicon-trash"></span>' +
-                                        '</a>' +                                        
-                                    '</td>' +                                     
-                                  '</tr>';
-             
-             
-            $.post(
-                    "Post/postLoaderAll.jsp",
-                    function(data) {
-                        //  TODO appeler la bd pour loader tous les posts de l'utilisateur
-                        for (var i = 0; i < data.length; i++){ 
-
-                           //  changer toutes les occurences de id_post avec le flag 'g'
-                           example = postTemplate.replace(/id_post/g, data[i].id_post);                
-                           example = example.replace("title_post", data[i].title_post);                         
-                           example = example.replace("date_post", data[i].date_post);
-                           example = example.replace("tag_post", data[i].name_tag);
-
-                           $("#body_post").append(example);             
-                       } 
-                    }
-                    );                         
-        }
-    </script>
     </body>
 </html>
