@@ -46,11 +46,11 @@
                                 <input type="signupName" name="signupName" class="form-control" id="signupName" placeholder="Nom complet" required>
                             </div>
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
-                                <label class="sr-only" for="exampleInputEmail2"> Votre e-mail</label>
+                                <label class="sr-only" for="exampleInputEmail"> Votre e-mail</label>
                                 <input type="signupEmail" name="signupEmail" class="form-control" id="signupEmail" placeholder="Adresse Mail" required>
                             </div>
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
-                                <label class="sr-only" for="exampleInputPassword2">Nouveau mot de passe</label>
+                                <label class="sr-only" for="exampleInputPassword">Nouveau mot de passe</label>
                                 <input type="signupPassword" name="signupPassword" class="form-control" id="signupPassword" placeholder="Mot de passe" required>
                             </div>
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
@@ -69,14 +69,14 @@
                 <ul id="login-dp" class="dropdown-menu">
                     <li><form id="login" class="loginForm" role="form" method="post" action="SignIn.jsp" accept-charset="UTF-8" id="login-nav">
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
-                                <label class="sr-only" for="exampleInputEmail2">E-mail</label>
-                                <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Adresse Mail" required>
+                                <label class="sr-only" for="exampleInputName2">E-mail</label>
+                                <input type="signinName" class="form-control" id="exampleInputEmail2" placeholder="Adresse Mail" required>
                             </div>
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
                                 <label class="sr-only" for="exampleInputPassword2">Mot de passe</label>
-                                <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Mot de passe" required>
+                                <input type="signinPassword" class="form-control" id="exampleInputPassword2" placeholder="Mot de passe" required>
                                 <div class="help-block text-right">
-                                    <a href="" style="margin-right: 25px;">Mot de passe oublié ?</a></div>
+                                    <a style="margin-right: 35px;color:blue;">Mot de passe oublié ?</a></div>
                             </div>
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
                                 <button type="submit" class="btn btn-primary btn-block">Se connecter</button>

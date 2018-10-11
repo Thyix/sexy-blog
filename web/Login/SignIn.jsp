@@ -4,13 +4,11 @@
 <%@page import="java.text.SimpleDateFormat"%>
 
 <%
-    String signupName = request.getParameter("signupName");
+    String signInName = request.getParameter("signinName");
     //Connection conn = connectToBD();
-    if (signupName != null) {
-        String signupEmail = request.getParameter("signupEmail");
-        String signupPassword = request.getParameter("signupPassword");
-        String signupUsername = request.getParameter("signupName");
-        boolean signingIn = SignIn(signupUsername, signupPassword, signupEmail);
+    if (signInName != null) {
+        String signInPassword = request.getParameter("signinPassword");
+        boolean signingIn = SignIn(signInName, signInPassword);
     }
 %>
 
@@ -33,26 +31,6 @@
         } catch (Exception e) {
             System.out.print("La connexion n'a pas pu être établie !");
             return null;
-        }
-    }
-
-    public boolean isConnected() {
-        PreparedStatement pst; 
-        ResultSet rs;
-        Connection conn = connectToBD();
-        String query = "SELECT * FROM user WHERE connected = TRUE";
-        try {
-            pst = conn.prepareCall(query);
-            pst.clearParameters();
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            System.out.print("Erreur lors de l'enregistrement : " + e);
-            return false;
         }
     }
 
