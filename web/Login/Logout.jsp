@@ -3,8 +3,15 @@
 <%@ page import = "java.util.logging.Level" %>
 <%@page import="java.text.SimpleDateFormat"%>
 
+<%
+    boolean isDisconnected = Logout();
+    out.flush();
+%>
+<script>
+    window.location='login.jsp';
+</script>
+
 <%!
-    ResultSet rs = null;
     public Connection connectToBD() {
         Connection conn = null; 
         try {
@@ -22,29 +29,19 @@
         }
     }
 
-    public boolean SignIn(String username, String password, String email) {
+    public boolean Logout() {
         PreparedStatement pst; 
-        ResultSet rs;
         Connection conn = connectToBD();
-        int randomID = (int)Math.random() % 3;
-        String query = String.format("INSERT INTO user (id_user, username_user, password_user, email_user) VALUES (%s, %s, %s, %s)",
-            randomID, username, password, email);
+        String query = "UPDATE user SET connected=0 WHERE connected=1";
         try {
-            pst = conn.prepareCall(query);
-            rs = pst.executeQuery();
+            pst = conn.prepareStatement(query, 1005, 1008);
+            pst.clearParameters();
+            pst.executeUpdate();
         } catch (Exception e) {
-            alert(e);
+            System.out.print("Erreur lors de l'enregistrement : " + e);
+            return false;
         }
+        return true;
     }
-    public java.sql.Date convertDate(String receivedDate) {
-        SimpleDateFormat simpleDate = new SimpleDateFormat("MM-dd-yyyy");
-        java.util.Date date = null;
-        try {
-            date = simpleDate.parse(receivedDate);
-        } catch (Exception e) {
-            System.out.print("La conversion n'a pas fonctionnée.");
-            return null;
-        }
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        return sqlDate;
-    }
+
+%>

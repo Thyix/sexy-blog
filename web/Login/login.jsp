@@ -23,45 +23,6 @@
 <%@ page import = "java.util.logging.Level" %>
 <%@page import="java.text.SimpleDateFormat"%>
 
-<%          
-    Connection connection;
-    PreparedStatement pst;
-    ResultSet rs;
-    connection  = connectToBD();
-%>
-<%
-    String signupName = request.getParameter("signupName");
-    //Connection conn = connectToBD();
-    if (signupName != null) {
-        String signupEmail = request.getParameter("signupEmail");
-        String signupPassword = request.getParameter("signupPassword");
-        String signupUsername = request.getParameter("signupName");
-        boolean test = SignIn(signupUsername, signupPassword, signupEmail);
-        int untest = 1;
-    }
-    //String query = String.format("SELECT * FROM post LIMIT %s, %s", firstPostIndex, postPerPage);
-    //String query = "TESTQUERY";
-    
-    //pst = connection.prepareCall(query);
-   // rs = pst.executeQuery();
-%>
-<%
-    //https://docs.oracle.com/javaee/7/api/javax/json/JsonObject.html
-    //JSONArray array = new JSONArray();
-    //while (rs.next()) {        
-        //JSONObject element = new JSONObject();
-        //element.put("id_user", rs.getString("id_user"));
-        //element.put("username_user", rs.getString("username_user"));
-        //element.put("password_user", rs.getString("password_user"));
-        //element.put("email_user", rs.getString("email_user"));
-       // element.put("connected_user", rs.getString("connected_user"));
-       // array.put(element);
-    //}
-      
-    //out.print(array);
-   // out.flush();
-%>
-
   <body>
 
     <div class="container">
@@ -71,13 +32,15 @@
             <a class="text-muted" href="#">Subscribe</a>
           </div>
           <div class="col-4 text-center">
-            <a class="blog-header-logo text-dark" href="#">Large</a>
+            <a class="blog-header-logo text-dark" href="#">Sexy Blog</a>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
+              <% boolean connected = isConnected();
+              if (!connected) {%>
               <div>
               <button id="inscription" type="button" style="margin-right: 15px" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" data-placement="bottom" title="Nouveau compte">S'inscrire</button>
               <ul id="signup-nav" class="dropdown-menu">
-                    <li><form id="register" class="registerForm" role="form" method="post" action="login.jsp" accept-charset="UTF-8" id="signup-nav">
+                    <li><form id="register" class="registerForm" role="form" method="post" action="SignUp.jsp" accept-charset="UTF-8" id="signup-nav">
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
                                 <label class="sr-only" for="exampleInputName">Nom complet</label>
                                 <input type="signupName" name="signupName" class="form-control" id="signupName" placeholder="Nom complet" required>
@@ -104,7 +67,7 @@
               <div>
               <button id="connection" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" data-placement="bottom" title="Compte existant">Se connecter</button>
                 <ul id="login-dp" class="dropdown-menu">
-                    <li><form id="login" class="loginForm" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                    <li><form id="login" class="loginForm" role="form" method="post" action="SignIn.jsp" accept-charset="UTF-8" id="login-nav">
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
                                 <label class="sr-only" for="exampleInputEmail2">E-mail</label>
                                 <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Adresse Mail" required>
@@ -126,6 +89,15 @@
                         </form>
                 </ul>
               </div>
+              <%} else {
+                String name = findUserName();
+              %> 
+                <h6 class="p-2 text-muted" style="margin-top:10px;margin-right:-10px;">Bonjour</h6>
+                <strong class="p-2 text-muted" style="margin-right: 25px;"><%=name%></strong>
+                        <form id="register" class="logoutForm" method="post" action="Logout.jsp" accept-charset="UTF-8" id="signup-nav">
+                            <button type="submit" class="btn btn-outline-secondary"  title="Compte existant">Se Déconnecter</button>
+                        </form>
+                <%}%>
       </header>
 
       <div class="nav-scroller py-1 mb-2">
@@ -219,41 +191,48 @@
                     "");
             return conn;
         } catch (Exception e) {
-            System.out.print("La connexion n'a pas pu être établie !");
             return null;
         }
     }
 
-    public boolean SignIn(String username, String password, String email) {
+    public String findUserName() {
         PreparedStatement pst; 
         ResultSet rs;
         Connection conn = connectToBD();
-        int randomID = (int)Math.floor((Math.random() * 1000) + 1); ;
-        String query = "INSERT INTO user (id_user, username_user, password_user, email_user) VALUES (?, ?, ?, ?)";
+        String query = "SELECT username_user FROM user WHERE connected = TRUE";
         try {
-            pst = conn.prepareStatement(query, 1005, 1008);
+            pst = conn.prepareCall(query);
             pst.clearParameters();
-            pst.setInt(1, randomID);
-            pst.setString(2, username);           
-            pst.setString(3, password);
-            pst.setString(4, email);
-            pst.executeUpdate();
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            } else {
+                return "";
+            }
         } catch (Exception e) {
             System.out.print("Erreur lors de l'enregistrement : " + e);
+            return "";
         }
-        return true;
     }
-    public java.sql.Date convertDate(String receivedDate) {
-        SimpleDateFormat simpleDate = new SimpleDateFormat("MM-dd-yyyy");
-        java.util.Date date = null;
+
+    public boolean isConnected() {
+        PreparedStatement pst; 
+        ResultSet rs;
+        Connection conn = connectToBD();
+        String query = "SELECT * FROM user WHERE connected = TRUE";
         try {
-            date = simpleDate.parse(receivedDate);
+            pst = conn.prepareCall(query);
+            pst.clearParameters();
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
-            System.out.print("La conversion n'a pas fonctionnée.");
-            return null;
+            System.out.print("Erreur lors de l'enregistrement : " + e);
+            return false;
         }
-        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-        return sqlDate;
     }
     %>
     
