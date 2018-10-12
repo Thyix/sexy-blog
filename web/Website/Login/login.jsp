@@ -28,13 +28,18 @@
       <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
           <div class="col-4 pt-1">
-            <a class="text-muted" href="#">Subscribe</a>
+            <% boolean connected = isConnected();
+            if (connected) {%>
+                <a class="text-muted" href="./modDeleteExemple.jsp">Mes publications</a>
+            <%} else {%>
+                <a style="top:0;" class="text-muted">Programmation web</a>
+           <%}%>
           </div>
-          <div class="col-4 text-center">
-            <a class="blog-header-logo text-dark" href="#">Sexy Blog</a>
+          <div class="col-4 text-center" style="top:10px;">
+            <h2 class="d-inline-block mb-2 text-success">SEXY BLOG</h2>
           </div>
-          <div class="col-4 d-flex justify-content-end align-items-center">
-              <% boolean connected = isConnected();
+          <div class="col-4 d-flex justify-content-end align-items-center" style="top:5px;">
+              <%
               if (!connected) {%>
               <div>
               <button id="inscription" type="button" style="margin-right: 15px" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" data-placement="bottom" title="Nouveau compte">S'inscrire</button>
