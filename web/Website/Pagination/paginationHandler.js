@@ -11,10 +11,10 @@ function paginationHandler(id){
                                          
                     var numberPost = parseInt(response.count_post);
                    
-                    if(numberPost < 4) { 
+                    if(numberPost < 5) { 
                         numberPost = 1;
                     } else { 
-                        numberPost = Math.ceil(numberPost/4);
+                        numberPost = Math.ceil(numberPost/5);
                     }
 
                      for(var i = 0; i < numberPost; i++) {
