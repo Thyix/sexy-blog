@@ -9,8 +9,15 @@
     if (signupName != null) {
         String signupEmail = request.getParameter("signupEmail");
         String signupPassword = request.getParameter("signupPassword");
-        String signupUsername = request.getParameter("signupName");
-        boolean signingIn = SignUp(signupUsername, signupPassword, signupEmail);
+        boolean isExisting = ExistingUser(signupEmail);
+        if (!isExisting) {
+            boolean signingUp = SignUp(signupName, signupPassword, signupEmail);
+        } else {%>
+        <script>
+            window.location='login.jsp';
+            window.alert("Cet email d'utilisateur est déjà prit.");
+        </script>
+        <%}
     }
 %>
 
@@ -35,6 +42,29 @@
             return null;
         }
     }
+
+    public boolean ExistingUser(String username) {
+        PreparedStatement pst; 
+        ResultSet rs;
+        Connection conn = connectToBD();
+        String query = "SELECT * FROM user WHERE email_user = ?";
+        try {
+            pst = conn.prepareCall(query);
+            pst.clearParameters();
+            pst.setString(1, username);
+            rs = pst.executeQuery();
+            rs.next();
+            String id = rs.getString(1);
+            if (id!=null) {
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            System.out.print("Erreur lors de l'enregistrement : " + e);
+            return false;
+        }
+    }
+
 
     public boolean SignUp(String username, String password, String email) {
         PreparedStatement pst; 

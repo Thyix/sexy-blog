@@ -45,19 +45,19 @@
               <button id="inscription" type="button" style="margin-right: 15px" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" data-placement="bottom" title="Nouveau compte">S'inscrire</button>
               <ul id="signup-nav" class="dropdown-menu">
                     <li><form id="register" class="registerForm" role="form" method="post" action="SignUp.jsp" accept-charset="UTF-8" id="signup-nav">
-                            <div class="form-group" style="margin-right:5px; margin-left:5px;">
+                            <div class="form-group" style="margin-right:10px; margin-left:10px;">
                                 <label class="sr-only" for="exampleInputName">Nom complet</label>
                                 <input type="signupName" name="signupName" class="form-control" id="signupName" placeholder="Nom complet" required>
                             </div>
-                            <div class="form-group" style="margin-right:5px; margin-left:5px;">
+                            <div class="form-group" style="margin-right:10px; margin-left:10px;">
                                 <label class="sr-only" for="exampleInputEmail"> Votre e-mail</label>
-                                <input type="signupEmail" name="signupEmail" class="form-control" id="signupEmail" placeholder="Adresse Mail" required>
+                                <input type="email" name="signupEmail" class="form-control" id="signupEmail" placeholder="Adresse Mail" required>
                             </div>
-                            <div class="form-group" style="margin-right:5px; margin-left:5px;">
+                            <div class="form-group" style="margin-right:10px; margin-left:10px;">
                                 <label class="sr-only" for="exampleInputPassword">Nouveau mot de passe</label>
-                                <input type="signupPassword" name="signupPassword" class="form-control" id="signupPassword" placeholder="Mot de passe" required>
+                                <input type="password" name="signupPassword" class="form-control" id="signupPassword" placeholder="Mot de passe" required>
                             </div>
-                            <div class="form-group" style="margin-right:5px; margin-left:5px;">
+                            <div class="form-group" style="margin-right:15px; margin-left:15px;">
                                 <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
                             </div>
                             <div class="checkbox">
@@ -72,17 +72,17 @@
               <button id="connection" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" data-placement="bottom" title="Compte existant">Se connecter</button>
                 <ul id="login-dp" class="dropdown-menu">
                     <li><form id="login" class="loginForm" role="form" method="post" action="SignIn.jsp" accept-charset="UTF-8" id="login-nav">
-                            <div class="form-group" style="margin-right:5px; margin-left:5px;">
+                            <div class="form-group" style="margin-right:10px; margin-left:10px;">
                                 <label class="sr-only" for="exampleInputName2">E-mail</label>
                                 <input type="signinName" name="signinName" class="form-control" id="exampleInputEmail2" placeholder="Adresse Mail" required>
                             </div>
-                            <div class="form-group" style="margin-right:5px; margin-left:5px;">
+                            <div class="form-group" style="margin-right:10px; margin-left:10px;">
                                 <label class="sr-only" for="exampleInputPassword2">Mot de passe</label>
-                                <input type="signinPassword" name="signinPassword" class="form-control" id="exampleInputPassword2" placeholder="Mot de passe" required>
+                                <input type="password" name="signinPassword" class="form-control" id="exampleInputPassword2" placeholder="Mot de passe" required>
                                 <div class="help-block text-right">
                                     <a style="margin-right: 35px;color:blue;">Mot de passe oublié ?</a></div>
                             </div>
-                            <div class="form-group" style="margin-right:5px; margin-left:5px;">
+                            <div class="form-group" style="margin-right:15px; margin-left:15px;">
                                 <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
                             </div>
                             <div class="checkbox">
