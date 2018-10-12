@@ -119,7 +119,7 @@
             $.post(
                     "Post/deletePost.jsp",
                     {idPost: obj.id},
-                    function() {
+                    function(data) {
                         refreshTable();           
                     }
                     );          

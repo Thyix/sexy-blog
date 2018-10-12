@@ -27,4 +27,9 @@
     
     pst.close();
     connection.close();
+    
+    JSONObject element = new JSONObject();
+    element.put("mkay", "Success");
+    out.print(element);
+    out.flush();
 %>
