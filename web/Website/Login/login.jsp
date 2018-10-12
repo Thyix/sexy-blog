@@ -79,7 +79,7 @@
                             <div class="form-group" style="margin-right:10px; margin-left:10px;">
                                 <label class="sr-only" for="exampleInputPassword2">Mot de passe</label>
                                 <input type="password" name="signinPassword" class="form-control" id="exampleInputPassword2" placeholder="Mot de passe" required>
-                                <div class="help-block text-right">
+                                <div class="help-block text-right" style="margin-top:5px;">
                                     <a style="margin-right: 35px;color:blue;">Mot de passe oublié ?</a></div>
                             </div>
                             <div class="form-group" style="margin-right:15px; margin-left:15px;">
