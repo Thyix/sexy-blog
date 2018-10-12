@@ -32,7 +32,7 @@
             if (connected) {%>
                 <a class="text-muted" href="../ModifyDeletePost.jsp">Mes publications</a>
             <%} else {%>
-                <a style="top:0;" class="text-muted">Programmation web</a>
+                <a style="top:0;" class="text-muted">Programmation web 2018</a>
            <%}%>
           </div>
           <div class="col-4 text-center" style="top:10px;">
