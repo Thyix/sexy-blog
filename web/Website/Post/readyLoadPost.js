@@ -1,4 +1,6 @@
 $(document).ready(function() {
-    postHandler(0, 4);       
+    var id = getParameterUrl("categoryId");
+    postHandler(0, 5, id);       
 });
+
 

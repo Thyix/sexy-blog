@@ -1,3 +1,5 @@
 $(document).ready(function() {
-       paginationHandler();           
+
+    var id = getParameterUrl("categoryId");  
+    paginationHandler(id);           
 });
