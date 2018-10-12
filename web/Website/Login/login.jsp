@@ -30,7 +30,7 @@
           <div class="col-4 pt-1">
             <% boolean connected = isConnected();
             if (connected) {%>
-                <a class="text-muted" href="./modDeleteExemple.jsp">Mes publications</a>
+                <a class="text-muted" href="../ModifyDeletePost.jsp">Mes publications</a>
             <%} else {%>
                 <a style="top:0;" class="text-muted">Programmation web</a>
            <%}%>

@@ -25,6 +25,7 @@
     <link href="../CSS/blog.css" rel="../stylesheet">
     <link href="../CSS/bootstrap-datepicker.css" rel="stylesheet">
     <link rel="stylesheet" href="fastselect.min.css">
+    <link rel="stylesheet" href="ModifyDeletePost.css">
        
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
       
@@ -41,6 +42,7 @@
     <script src="Post/readyLoadPost.js" type="text/javascript"></script> 
     <script src="Post/openPost.js" type="text/javascript"></script> 
   </head>   
+  
     <body>
          <div class="container">
       <header class="blog-header py-3">
@@ -49,7 +51,7 @@
             
           </div>
          <div class="col-4 text-center">
-            <a class="blog-header-logo text-dark" href="blog.jsp">Sexy-blog</a>
+            <a class="d-inline-block mb-2 text-success" style="font-size:20px;" href="blog.jsp">Sexy-blog</a>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">                                  
         </div>
@@ -62,7 +64,7 @@
       </div>
              
             <div id="table_post">
-                <table class="table">
+                <table id="Posts">
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
