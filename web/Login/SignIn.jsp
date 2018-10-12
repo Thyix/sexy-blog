@@ -8,7 +8,15 @@
     //Connection conn = connectToBD();
     if (signInName != null) {
         String signInPassword = request.getParameter("signinPassword");
-        boolean signingIn = SignIn(signInName, signInPassword);
+        String userID = ExistingUser(signInName, signInPassword);
+        if (userID == "") {%>
+        <script>
+            window.location='login.jsp';
+            window.alert("Les identifiants sont incorrects");
+        </script>
+        <%} else {
+            boolean isSignedIn = SignIn(userID);
+        }
     }
 %>
 
@@ -34,20 +42,37 @@
         }
     }
 
-    public boolean SignIn(String username, String password, String email) {
+    public String ExistingUser(String username, String password) {
         PreparedStatement pst; 
         ResultSet rs;
         Connection conn = connectToBD();
-        int randomID = (int)Math.floor((Math.random() * 1000) + 1); ;
-        String query = "INSERT INTO user (id_user, username_user, password_user, email_user, connected) VALUES (?, ?, ?, ?, ?)";
+        String query = "SELECT id_user FROM user WHERE email_user = ? AND password_user = ?";
+        try {
+            pst = conn.prepareCall(query);
+            pst.clearParameters();
+            pst.setString(1, username);
+            pst.setString(2, password);
+            rs = pst.executeQuery();
+            rs.next();
+            String id = rs.getString(1);
+            if (id!=null) {
+                return rs.getString(1);
+            }
+            return "";
+        } catch (Exception e) {
+            System.out.print("Erreur lors de l'enregistrement : " + e);
+            return "";
+        }
+    }
+
+    public boolean SignIn(String ID) {
+        PreparedStatement pst; 
+        Connection conn = connectToBD();
+        String query = "UPDATE user SET connected=1 WHERE id_user=?";
         try {
             pst = conn.prepareStatement(query, 1005, 1008);
             pst.clearParameters();
-            pst.setInt(1, randomID);
-            pst.setString(2, username);           
-            pst.setString(3, password);
-            pst.setString(4, email);
-            pst.setBoolean(5, true);
+            pst.setString(1, ID);
             pst.executeUpdate();
         } catch (Exception e) {
             System.out.print("Erreur lors de l'enregistrement : " + e);

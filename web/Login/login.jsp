@@ -70,11 +70,11 @@
                     <li><form id="login" class="loginForm" role="form" method="post" action="SignIn.jsp" accept-charset="UTF-8" id="login-nav">
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
                                 <label class="sr-only" for="exampleInputName2">E-mail</label>
-                                <input type="signinName" class="form-control" id="exampleInputEmail2" placeholder="Adresse Mail" required>
+                                <input type="signinName" name="signinName" class="form-control" id="exampleInputEmail2" placeholder="Adresse Mail" required>
                             </div>
                             <div class="form-group" style="margin-right:5px; margin-left:5px;">
                                 <label class="sr-only" for="exampleInputPassword2">Mot de passe</label>
-                                <input type="signinPassword" class="form-control" id="exampleInputPassword2" placeholder="Mot de passe" required>
+                                <input type="signinPassword" name="signinPassword" class="form-control" id="exampleInputPassword2" placeholder="Mot de passe" required>
                                 <div class="help-block text-right">
                                     <a style="margin-right: 35px;color:blue;">Mot de passe oublié ?</a></div>
                             </div>
