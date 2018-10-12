@@ -1,3 +1,4 @@
+
 <%@page import="org.json.JSONArray"%>
 <%@page contentType="application/json" pageEncoding="UTF-8"%>
 <%@page import="org.json.JSONObject"%>
@@ -8,10 +9,8 @@
     Connection connection;
     PreparedStatement pst;
     ResultSet rs;  
-
     // Load the JDBC driver      
     Class.forName("com.mysql.jdbc.Driver").newInstance(); 
-
     String serverName = "localhost";      
     String mydatabase = "sexy-blog";      
     String url = "jdbc:mysql://" + serverName + "/" + mydatabase; // a JDBC url      

@@ -46,20 +46,19 @@ public final class loadPosts_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_out = out;
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("      \n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("\r\n");
+      out.write("      \r\n");
           
     Connection connection;
     PreparedStatement pst;
     ResultSet rs;  
-
     // Load the JDBC driver      
     Class.forName("com.mysql.jdbc.Driver").newInstance(); 
-
     String serverName = "localhost";      
     String mydatabase = "sexy-blog";      
     String url = "jdbc:mysql://" + serverName + "/" + mydatabase; // a JDBC url      
@@ -67,12 +66,15 @@ public final class loadPosts_jsp extends org.apache.jasper.runtime.HttpJspBase
     String password = "";     
     connection = DriverManager.getConnection(url, username, password);             
 
+      out.write('\r');
       out.write('\n');
- 
-    int nbPage = Integer.parseInt("page") * 4;
+
+    // TO READ https://hackernoon.com/guys-were-doing-pagination-wrong-f6c18a91b232
+    int nbPage = Integer.parseInt(request.getParameter("page")) * 4;
     pst = connection.prepareCall("SELECT * FROM post LIMIT " + String.valueOf(nbPage) + ",4");
     rs = pst.executeQuery();
 
+      out.write('\r');
       out.write('\n');
 
     //https://docs.oracle.com/javaee/7/api/javax/json/JsonObject.html
@@ -90,7 +92,6 @@ public final class loadPosts_jsp extends org.apache.jasper.runtime.HttpJspBase
     out.print(array);
     out.flush();
 
-      out.write('\n');
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;

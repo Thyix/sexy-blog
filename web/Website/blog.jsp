@@ -24,11 +24,9 @@
     <link href="CSS/blog.css" rel="../stylesheet">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
-<<<<<<< HEAD:web/TestAjax/posts.jsp
     <script src="loadPosts.js" type="text/javascript"></script> 
     <script src="loadPagination.js" type="text/javascript"></script> 
     <script src="paginationOnClick.js" type="text/javascript"></script> 
-=======
    
      <script src="../JS/fonctionUtilitaire.js" type="text/javascript"></script>
      
@@ -43,7 +41,6 @@
     <script src="Post/readyLoadPost.js" type="text/javascript"></script> 
     <script src="Post/openPost.js" type="text/javascript"></script> 
     
->>>>>>> Pascal:web/Website/blog.jsp
   </head>   
     <body>
          <div class="container">
@@ -95,5 +92,4 @@
     </script>
     </body>
 </html>
-
 
