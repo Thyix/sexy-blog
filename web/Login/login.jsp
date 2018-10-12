@@ -21,7 +21,6 @@
 <%@ page import = "java.sql.*" %>
 <%@ page import = "java.util.logging.Logger" %>
 <%@ page import = "java.util.logging.Level" %>
-<%@page import="java.text.SimpleDateFormat"%>
 
   <body>
 
