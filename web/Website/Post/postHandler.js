@@ -31,8 +31,11 @@ function postHandler(pageNumber, postPerPage, tag) {
                               '</div>' +
                           '</div>';
                   
+                
+                
                 bigPost = bigPost.replace("title_post", data[0].title_post); 
-                bigPost = bigPost.replace("content_post", data[0].content_post); 
+                // max 50 caracters of content displayed
+                bigPost = bigPost.replace("content_post", TruncContent(data[0].content_post)); 
                 bigPost = bigPost.replace("id_post", data[0].id_post); 
                 bigPost = bigPost.replace("pictureURL_post", data[0].pictureURL_post); 
                  
@@ -49,7 +52,8 @@ function postHandler(pageNumber, postPerPage, tag) {
                         
                         var res = block.replace("title_post", data[i].title_post);
                         res = res.replace("date_post", data[i].date_post);
-                        res = res.replace("content_post", data[i].content_post);
+                        // max 50 caracters of content displayed
+                        res = res.replace("content_post", TruncContent(data[i].content_post));
                         res = res.replace("pictureURL_post", data[i].pictureURL_post);
                         res = res.replace("id_post", data[i].id_post);
                          res = res.replace("name_tag", data[i].name_tag);
@@ -64,6 +68,19 @@ function postHandler(pageNumber, postPerPage, tag) {
                     }    
         }
     );
+}
+
+function TruncContent(content) {
+    var contentMaxLength = 100;
+    
+    // add ... to content to show theres more to the article if its bigger than the max length
+    var truncContent = content.substring(0, contentMaxLength);
+    
+    if(content.length > contentMaxLength) {
+        truncContent += "...";
+    }
+    
+    return truncContent;
 }
 
 

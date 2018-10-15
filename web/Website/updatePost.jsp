@@ -60,7 +60,7 @@
         </nav>
       </div>
 
-    <form action="Post/postCreator.jsp" method="post">
+    <form action="Post/postUpdate.jsp" method="post" id="form_post">
         <%-- tag picker https://www.jqueryscript.net/form/Dynamic-jQuery-Multi-Select-Tags-Input-Plugin-Fast-Select.html --%>
                 
         <label>Title</label>
@@ -81,7 +81,7 @@
         <label>Picture url</label>
         <input class="form-control" type="text" id="pictureURL_post" name="pictureURL_post"><br>
         
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Create post</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Update post</button>
     </form>      
         
      <footer class="blog-footer">  
@@ -106,5 +106,32 @@
         text: 'Thumbnail'
       });
     </script>
+    
+    <script>
+        $(document).ready(function() {
+               var id = getParameterUrl("postId");
+               $.post(
+                    "Post/modifyPost.jsp",
+                    {idPost: id},
+                    function(data) {
+                        // TODO ouvrir la page de modification (identique à la création) en passant l'id du post à modifier pour remplir les éléments                       
+                        $("#title_post").val(data.title_post);   
+                        // format goal "MM/dd/yyyy"
+                        
+                        var date_str = data.date_post;
+                        var date = date_str.replace(/(\d{4})-(\d{2})-(\d{2})/, "$2/$3/$1");
+                        
+                        $("#date_post").val(date);
+                        $("#tag_post").val(data.id_tag);
+                        $("#content_post").val(data.content_post);
+                        $("#pictureURL_post").val(data.pictureURL_post);
+                    }
+                    );  
+                
+                // ugly fix to send id_post when update is submit
+                $("#form_post").append('<input type="hidden" name="id_post" value="' + id +'" />');               
+        });    
+    </script>
+    
     </body>
 </html>

@@ -57,6 +57,8 @@
             <%} else {%>
                 <a style="top:0;" class="text-muted">Programmation web 2018</a>
            <%}%>
+              <a href="createPost.jsp" class="blog-header-logo text-dark">Create</a>
+              <a href="modDeleteExemple.jsp" class="blog-header-logo text-dark">Modify/Delete</a>
           </div>
           <div class="col-4 text-center" style="top:10px;">
             <h2 class="d-inline-block mb-2 text-success">SEXY BLOG</h2>

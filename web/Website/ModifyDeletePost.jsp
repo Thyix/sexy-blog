@@ -102,10 +102,35 @@
         text: 'Thumbnail'
       });
     </script>
-    
+       
     <!-- load existing post from author -->
      <script>
         $(document).ready(function() {
+               refreshTable();
+        });    
+    </script>
+    
+    <script>
+        function modifyPost(obj) { 
+            window.location.href = "updatePost.jsp?postId="+obj.id;                  
+        }
+    </script>
+    <script>
+        function deletePost(obj) {
+            // TODO appeler la bd pour supprimer le post avec l'id spécifique
+            $.post(
+                    "Post/deletePost.jsp",
+                    {idPost: obj.id},
+                    function(data) {
+                        refreshTable();           
+                    }
+                    );          
+        }
+    </script>   
+    <script>
+        function refreshTable() {
+            $("#body_post").html("");
+            
             var postTemplate =  '<tr>' +
                                     '<th scope="row">id_post</th>' +
                                     '<td>title_post</td>' +
@@ -121,35 +146,24 @@
                                     '</td>' +                                     
                                   '</tr>';
              
-            //  TODO appeler la bd pour loader tous les posts de l'utilisateur
-            var postTotalForUser = 7;
-            var exampleId = 1;
-            for (var i = 0; i < postTotalForUser; i++){ 
-                
-                //  changer toutes les occurences de id_post avec le flag 'g'
-                example = postTemplate.replace(/id_post/g, exampleId);                
-                exampleId++;
-                
-                example = example.replace("title_post", "Pourse");
-                example = example.replace("date_post", "2018-10-31");
-                example = example.replace("tag_post", "Anime");
+             
+            $.post(
+                    "Post/postLoaderAll.jsp",
+                    function(data) {
+                        //  TODO appeler la bd pour loader tous les posts de l'utilisateur
+                        for (var i = 0; i < data.length; i++){ 
 
-                $("#body_post").append(example);             
-            }          
-        });    
-    </script>
-    
-    <script>
-        function modifyPost(obj) {
-            // TODO ouvrir la page de modification (identique à la création) en passant l'id du post à modifier pour remplir les éléments
-            alert(obj.id);
+                           //  changer toutes les occurences de id_post avec le flag 'g'
+                           example = postTemplate.replace(/id_post/g, data[i].id_post);                
+                           example = example.replace("title_post", data[i].title_post);                         
+                           example = example.replace("date_post", data[i].date_post);
+                           example = example.replace("tag_post", data[i].name_tag);
+
+                           $("#body_post").append(example);             
+                       } 
+                    }
+                    );                         
         }
     </script>
-    <script>
-        function deletePost(obj) {
-            // TODO appeler la bd pour supprimer le post avec l'id spécifique
-            alert(obj.id);
-        }
-    </script>      
     </body>
 </html>
