@@ -13,7 +13,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="../favicon.ico">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <title>JSP Page</title>
 
     <!-- Bootstrap core CSS -->
@@ -289,10 +290,10 @@
                                     '<td>tag_post</td>' +
                                     '<td>' + 
                                         '<a id="id_post" onclick="modifyPost(this)" style="padding-right: 5px;">' +
-                                            '<span class="glyphicon glyphicon-pencil"></span>' +
+                                            '<i class="fas fa-edit"></i>' +
                                         '</a>' +
                                         '<a id="id_post" onclick="deletePost(this)">' +
-                                            '<span class="glyphicon glyphicon-trash"></span>' +
+                                            '<i class="fas fa-trash-alt"></i>' +
                                         '</a>' +                                        
                                     '</td>' +                                     
                                   '</tr>';
