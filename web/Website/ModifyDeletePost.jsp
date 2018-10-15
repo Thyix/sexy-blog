@@ -146,9 +146,10 @@
                                     '</td>' +                                     
                                   '</tr>';
              
-             
+            var userID = getParameterUrl("userID");
             $.post(
                     "Post/postLoaderAll.jsp",
+                    {userID: userID},
                     function(data) {
                         //  TODO appeler la bd pour loader tous les posts de l'utilisateur
                         for (var i = 0; i < data.length; i++){ 

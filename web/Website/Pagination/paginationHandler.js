@@ -4,10 +4,7 @@ function paginationHandler(id){
                 data: {categoryId: id}, 
                 success: function(response) {
                     var str = '<nav aria-label="Page navigation example">' +
-                                '<ul class="pagination justify-content-center">' +
-                                  '<li class="page-item">' +
-                                    '<a class="page-link" id="previous" onclick="ajaxPost(this)">Previous</a>' +
-                                  '</li>';
+                                '<ul class="pagination justify-content-center">';
                                          
                     var numberPost = parseInt(response.count_post);
                    
@@ -21,10 +18,7 @@ function paginationHandler(id){
                         str += '<li class="page-item"><a class="page-link" id="' + i + '" onclick="ajaxPost(this)">' + i + '</a></li>' 
                      }
                      
-                     str += '<li class="page-item">' +
-                                    '<a class="page-link" id="next" onclick="ajaxPost(this)">Next</a>' +
-                                  '</li>' +
-                                '</ul>' +
+                     str +=     '</ul>' +
                              '</nav>';  
                      
                      $("#pagination").html(str);    

@@ -50,18 +50,18 @@
          <div class="container">
       <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
-          <div class="col-4 pt-1">
+          <div class="col-4 pt-2">
             <% boolean connected = isConnected();
-            if (connected) {%>
-                <a class="text-muted" href="../ModifyDeletePost.jsp">Mes publications</a>
+            if (connected) {
+            String id = findUserID();%>
+            <a class="text-muted" style="margin-right: 20px;" onclick="modifyPost(<%=id%>)">Mes publications</a>
+                <a class="text-muted" href="createPost.jsp">Créer une publication</a>
             <%} else {%>
                 <a style="top:0;" class="text-muted">Programmation web 2018</a>
            <%}%>
-              <a href="createPost.jsp" class="blog-header-logo text-dark">Create</a>
-              <a href="modDeleteExemple.jsp" class="blog-header-logo text-dark">Modify/Delete</a>
           </div>
           <div class="col-4 text-center" style="top:10px;">
-            <h2 class="d-inline-block mb-2 text-success">SEXY BLOG</h2>
+            <h2 class="mb-2 text-success">SEXY BLOG</h2>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center" style="top:5px;">
               <%
@@ -85,11 +85,6 @@
                             <div class="form-group" style="margin-right:15px; margin-left:15px;">
                                 <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
                             </div>
-                            <div class="checkbox">
-                                <label>
-                                <input style="margin-left: 35px;" type="checkbox"> Rester connecté
-                                </label>
-                            </div>
                         </form>
                 </ul>
               </div>
@@ -105,15 +100,10 @@
                                 <label class="sr-only" for="exampleInputPassword2">Mot de passe</label>
                                 <input type="password" name="signinPassword" class="form-control" id="exampleInputPassword2" placeholder="Mot de passe" required>
                                 <div class="help-block text-right" style="margin-top:5px;">
-                                    <a style="margin-right: 35px;color:blue;">Mot de passe oublié ?</a></div>
+                                </div>
                             </div>
                             <div class="form-group" style="margin-right:15px; margin-left:15px;">
                                 <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
-                            </div>
-                            <div class="checkbox">
-                                <label>
-                                <input style="margin-left: 35px;" type="checkbox"> Rester connecté
-                                </label>
                             </div>
                         </form>
                 </ul>
@@ -130,7 +120,7 @@
       </header>
 
       <div class="nav-scroller py-1 mb-2">
-        <nav class="nav d-flex justify-content-between" id="tag_category" id="tag_category">
+        <nav class="nav d-flex justify-content-between" id="tag_category">
      
         </nav>
       </div>
@@ -146,6 +136,11 @@
         <a href="blog.jsp">Back to home</a>
       </p>
     </footer>
+      <script>
+          function modifyPost(id) {
+               window.location.href = "ModifyDeletePost.jsp?userID="+id;  
+          }
+       </script>
       
       <%!
     public Connection connectToBD() {
@@ -169,6 +164,26 @@
         ResultSet rs;
         Connection conn = connectToBD();
         String query = "SELECT username_user FROM user WHERE connected = TRUE";
+        try {
+            pst = conn.prepareCall(query);
+            pst.clearParameters();
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            } else {
+                return "";
+            }
+        } catch (Exception e) {
+            System.out.print("Erreur lors de l'enregistrement : " + e);
+            return "";
+        }
+    }
+
+    public String findUserID() {
+        PreparedStatement pst; 
+        ResultSet rs;
+        Connection conn = connectToBD();
+        String query = "SELECT id_user FROM user WHERE connected = TRUE";
         try {
             pst = conn.prepareCall(query);
             pst.clearParameters();

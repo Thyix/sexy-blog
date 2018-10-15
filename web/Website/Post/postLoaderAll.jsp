@@ -20,7 +20,9 @@
     connection = DriverManager.getConnection(url, username, password);             
 %>
 <%
-    String query = "SELECT * FROM post JOIN tag where post.id_tag = tag.id_tag ORDER BY date_post DESC";
+    String userID = request.getParameter("userID");
+    
+    String query = String.format("SELECT * FROM post JOIN tag on post.id_tag = tag.id_tag where id_user = %s ORDER BY date_post DESC", userID);
     
     pst = connection.prepareCall(query);
     rs = pst.executeQuery();
