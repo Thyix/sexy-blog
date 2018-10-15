@@ -58,8 +58,8 @@
                 <a style="top:0;" class="text-muted">Programmation web 2018</a>
            <%}%>
           </div>
-          <div class="col-4 text-center" style="top:10px;">
-            <h2 class="mb-2 text-success">SEXY BLOG</h2>
+          <div class="col-4 text-center" style="top:5px;">
+              <h2 onclick="goToMenu()" class="mb-2 text-primary">SEXY BLOG</h2>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center" style="top:5px;">
               <%
@@ -115,6 +115,11 @@
                             <button type="submit" class="btn btn-outline-secondary"  title="Compte existant">Se Déconnecter</button>
                         </form>
                 <%}%>
+                <script>
+          function goToMenu() {
+               window.location.href = "blog.jsp";  
+          }
+       </script>
       </header>
 
       <div class="nav-scroller py-1 mb-2">

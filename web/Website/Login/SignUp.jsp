@@ -69,16 +69,14 @@
     public boolean SignUp(String username, String password, String email) {
         PreparedStatement pst; 
         Connection conn = connectToBD();
-        int randomID = (int)Math.floor((Math.random() * 1000) + 1); ;
-        String query = "INSERT INTO user (id_user, username_user, password_user, email_user, connected) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO user (username_user, password_user, email_user, connected) VALUES (?, ?, ?, ?)";
         try {
             pst = conn.prepareStatement(query, 1005, 1008);
             pst.clearParameters();
-            pst.setInt(1, randomID);
-            pst.setString(2, username);           
-            pst.setString(3, password);
-            pst.setString(4, email);
-            pst.setBoolean(5, true);
+            pst.setString(1, username);           
+            pst.setString(2, password);
+            pst.setString(3, email);
+            pst.setBoolean(4, true);
             pst.executeUpdate();
         } catch (Exception e) {
             System.out.print("Erreur lors de l'enregistrement : " + e);

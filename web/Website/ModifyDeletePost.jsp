@@ -18,7 +18,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
      
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
@@ -41,20 +41,88 @@
     <script src="Post/ajaxLoadPost.js" type="text/javascript"></script>    
     <script src="Post/readyLoadPost.js" type="text/javascript"></script> 
     <script src="Post/openPost.js" type="text/javascript"></script> 
+    
+    <%@ page import = "java.sql.*" %>
+<%@ page import = "java.util.logging.Logger" %>
+<%@ page import = "java.util.logging.Level" %>
   </head>   
   
     <body>
          <div class="container">
       <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
-          <div class="col-4 pt-1">
-            
+          <div class="col-4 pt-2">
+            <% boolean connected = isConnected();
+            if (connected) {
+            String id = findUserID();%>
+            <a class="text-muted" style="margin-right: 20px;" onclick="modifyPost(<%=id%>)">Mes publications</a>
+                <a class="text-muted" href="createPost.jsp">Créer une publication</a>
+            <%} else {%>
+                <a style="top:0;" class="text-muted">Programmation web 2018</a>
+           <%}%>
           </div>
-         <div class="col-4 text-center">
-            <a class="d-inline-block mb-2 text-success" style="font-size:20px;" href="blog.jsp">Sexy-blog</a>
+          <div class="col-4 text-center" style="top:5px;">
+            <h2 onclick="goToMenu()" class="mb-2 text-primary">SEXY BLOG</h2>
           </div>
-          <div class="col-4 d-flex justify-content-end align-items-center">                                  
-        </div>
+          <div class="col-4 d-flex justify-content-end align-items-center" style="top:5px;">
+              <%
+              if (!connected) {%>
+              <div>
+              <button id="inscription" type="button" style="margin-right: 15px" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" data-placement="bottom" title="Nouveau compte">S'inscrire</button>
+              <ul id="signup-nav" class="dropdown-menu">
+                    <li><form id="register" class="registerForm" role="form" method="post" action="./Login/SignUp.jsp" accept-charset="UTF-8" id="signup-nav">
+                            <div class="form-group" style="margin-right:10px; margin-left:10px;">
+                                <label class="sr-only" for="exampleInputName">Nom complet</label>
+                                <input type="signupName" name="signupName" class="form-control" id="signupName" placeholder="Nom complet" required>
+                            </div>
+                            <div class="form-group" style="margin-right:10px; margin-left:10px;">
+                                <label class="sr-only" for="exampleInputEmail"> Votre e-mail</label>
+                                <input type="email" name="signupEmail" class="form-control" id="signupEmail" placeholder="Adresse Mail" required>
+                            </div>
+                            <div class="form-group" style="margin-right:10px; margin-left:10px;">
+                                <label class="sr-only" for="exampleInputPassword">Nouveau mot de passe</label>
+                                <input type="password" name="signupPassword" class="form-control" id="signupPassword" placeholder="Mot de passe" required>
+                            </div>
+                            <div class="form-group" style="margin-right:15px; margin-left:15px;">
+                                <button type="submit" class="btn btn-primary btn-block">S'inscrire</button>
+                            </div>
+                        </form>
+                </ul>
+              </div>
+              <div>
+              <button id="connection" type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" data-placement="bottom" title="Compte existant">Se connecter</button>
+                <ul id="login-dp" class="dropdown-menu">
+                    <li><form id="login" class="loginForm" role="form" method="post" action="./Login/SignIn.jsp" accept-charset="UTF-8" id="login-nav">
+                            <div class="form-group" style="margin-right:10px; margin-left:10px;">
+                                <label class="sr-only" for="exampleInputName2">E-mail</label>
+                                <input type="signinName" name="signinName" class="form-control" id="exampleInputEmail2" placeholder="Adresse Mail" required>
+                            </div>
+                            <div class="form-group" style="margin-right:10px; margin-left:10px;">
+                                <label class="sr-only" for="exampleInputPassword2">Mot de passe</label>
+                                <input type="password" name="signinPassword" class="form-control" id="exampleInputPassword2" placeholder="Mot de passe" required>
+                                <div class="help-block text-right" style="margin-top:5px;">
+                                </div>
+                            </div>
+                            <div class="form-group" style="margin-right:15px; margin-left:15px;">
+                                <button type="submit" class="btn btn-primary btn-block">Se connecter</button>
+                            </div>
+                        </form>
+                </ul>
+              </div>
+              <%} else {
+                String name = findUserName();
+              %> 
+                <h6 class="p-2 text-muted" style="margin-top:10px;margin-right:-10px;">Bonjour</h6>
+                <strong class="p-2 text-muted" style="margin-right: 25px;"><%=name%></strong>
+                        <form id="register" class="logoutForm" method="post" action="./Login/Logout.jsp" accept-charset="UTF-8" id="signup-nav">
+                            <button type="submit" class="btn btn-outline-secondary"  title="Compte existant">Se Déconnecter</button>
+                        </form>
+                <%}%>
+                <script>
+          function goToMenu() {
+               window.location.href = "blog.jsp";  
+          }
+       </script>
       </header>
 
       <div class="nav-scroller py-1 mb-2">
@@ -83,6 +151,89 @@
      <footer class="blog-footer">  
 
     </footer>
+             <script>
+          function modifyPost(id) {
+               window.location.href = "ModifyDeletePost.jsp?userID="+id;  
+          }
+       </script>
+      
+      <%!
+    public Connection connectToBD() {
+        Connection conn = null; 
+        try {
+           Class.forName("com.mysql.jdbc.Driver").newInstance();
+           conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost/sexy-blog?verifyServerCertificate=false&useSSL=false&serverTimezone=UTC" + 
+                    "&user=" +
+                    "root" + 
+                    "&password=" +
+                    "");
+            return conn;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public String findUserName() {
+        PreparedStatement pst; 
+        ResultSet rs;
+        Connection conn = connectToBD();
+        String query = "SELECT username_user FROM user WHERE connected = TRUE";
+        try {
+            pst = conn.prepareCall(query);
+            pst.clearParameters();
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            } else {
+                return "";
+            }
+        } catch (Exception e) {
+            System.out.print("Erreur lors de l'enregistrement : " + e);
+            return "";
+        }
+    }
+
+    public String findUserID() {
+        PreparedStatement pst; 
+        ResultSet rs;
+        Connection conn = connectToBD();
+        String query = "SELECT id_user FROM user WHERE connected = TRUE";
+        try {
+            pst = conn.prepareCall(query);
+            pst.clearParameters();
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            } else {
+                return "";
+            }
+        } catch (Exception e) {
+            System.out.print("Erreur lors de l'enregistrement : " + e);
+            return "";
+        }
+    }
+
+    public boolean isConnected() {
+        PreparedStatement pst; 
+        ResultSet rs;
+        Connection conn = connectToBD();
+        String query = "SELECT * FROM user WHERE connected = TRUE";
+        try {
+            pst = conn.prepareCall(query);
+            pst.clearParameters();
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.print("Erreur lors de l'enregistrement : " + e);
+            return false;
+        }
+    }
+    %>
         <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster --> 
