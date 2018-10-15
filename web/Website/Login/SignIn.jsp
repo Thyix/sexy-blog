@@ -11,7 +11,7 @@
         String userID = ExistingUser(signInName, signInPassword);
         if (userID == "") {%>
         <script>
-            window.location='login.jsp';
+            window.location='../blog.jsp';
             window.alert("Les identifiants sont incorrects");
         </script>
         <%} else {
@@ -21,14 +21,14 @@
 %>
 
 <script>
-    window.location='login.jsp';
+    window.location='../blog.jsp';
 </script>
 
 <%!
     public Connection connectToBD() {
         Connection conn = null; 
         try {
-           Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+           Class.forName("com.mysql.jdbc.Driver").newInstance();
            conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost/sexy-blog?verifyServerCertificate=false&useSSL=false&serverTimezone=UTC" + 
                     "&user=" +
