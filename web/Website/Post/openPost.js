@@ -1,5 +1,5 @@
 function openPost(idPost) { 
-    window.location.href = "template.jsp?categoryId="+idPost.id;  
+    window.location.href = "DetailedPost.jsp?postId="+idPost.id;  
     
 }
 

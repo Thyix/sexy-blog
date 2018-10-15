@@ -30,7 +30,7 @@
 <%
     
     //  TODO insert id_tag
-    String query = "INSERT INTO post (date_post, title_post, content_post, pictureURL_post, id_tag) VALUES(?, ?, ?, ?, ?)";
+    String query = "INSERT INTO post (date_post, title_post, content_post, pictureURL_post, id_tag, id_user) VALUES(?, ?, ?, ?, ?, ?)";
     pst = connection.prepareStatement(query, 1005, 1008);
     pst.clearParameters();
     
@@ -40,6 +40,8 @@
     pst.setString(3, content);
     pst.setString(4, pictureURL);
     pst.setInt(5, Integer.parseInt(tag));
+    String userID = findUserID();
+    pst.setString(6, userID);
     
     pst.executeUpdate(); 
 
@@ -60,5 +62,61 @@
         }
         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
         return sqlDate;
+    }
+
+    public String findUserID() {
+        PreparedStatement pst; 
+        ResultSet rs;
+        Connection conn = connectToBD();
+        String query = "SELECT id_user FROM user WHERE connected = TRUE";
+        try {
+            pst = conn.prepareCall(query);
+            pst.clearParameters();
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1);
+            } else {
+                return "";
+            }
+        } catch (Exception e) {
+            System.out.print("Erreur lors de l'enregistrement : " + e);
+            return "";
+        }
+    }
+
+    public boolean isConnected() {
+        PreparedStatement pst; 
+        ResultSet rs;
+        Connection conn = connectToBD();
+        String query = "SELECT * FROM user WHERE connected = TRUE";
+        try {
+            pst = conn.prepareCall(query);
+            pst.clearParameters();
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.print("Erreur lors de l'enregistrement : " + e);
+            return false;
+        }
+    }
+
+    public Connection connectToBD() {
+        Connection conn = null; 
+        try {
+           Class.forName("com.mysql.jdbc.Driver").newInstance();
+           conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost/sexy-blog?verifyServerCertificate=false&useSSL=false&serverTimezone=UTC" + 
+                    "&user=" +
+                    "root" + 
+                    "&password=" +
+                    "");
+            return conn;
+        } catch (Exception e) {
+            return null;
+        }
     }
 %>

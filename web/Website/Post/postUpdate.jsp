@@ -45,7 +45,7 @@
     pst.close();
     connection.close();   
     
-   response.sendRedirect("../modDeleteExemple.jsp");
+   response.sendRedirect("../blog.jsp");
 %>
 <%!
     public java.sql.Date convertDate(String receivedDate) {
