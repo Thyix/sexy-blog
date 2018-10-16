@@ -14,9 +14,9 @@ function postHandler(pageNumber, postPerPage, tag) {
                                          '</h3>' +
                                          '<div class="mb-1 text-muted">date_post</div>' +
                                          '<p class="card-text mb-auto">content_post</p>' +
-                                         '<a id="id_post" onclick="openPost(this)">Continue reading</a>' +
+                                         '<a id="id_post" onclick="openPost(this)" href="#">Continue reading</a>' +
                                        '</div>' +
-                                       '<img class="card-img-right flex-auto d-none d-lg-block" style="width:200px;height:200px" src="pictureURL_post" alt="Card image cap">' +                                     
+                                       '<img class="card-img-right flex-auto d-none d-lg-block" style="width:200px;height:230px;min-width:200px;min-height:230px;max-width:200px;max-height:230px" src="pictureURL_post" alt="Card image cap">' +                                     
                                      '</div>' + 
                                 '</div>';   
             
@@ -27,7 +27,7 @@ function postHandler(pageNumber, postPerPage, tag) {
                                 '<div class="col-md-6 px-0">' +
                                         '<h1 class="display-4 font-italic">title_post</h1>' +
                                         '<p class="lead my-3">content_post</p>' +
-                                        '<p class="lead mb-0"><a id="id_post" onclick="openPost(this)" class="text-white font-weight-bold">Continue reading...</a></p>' +                                   
+                                        '<p class="lead mb-0"><a id="id_post" onclick="openPost(this)" class="text-white font-weight-bold" href="#">Continue reading...</a></p>' +                                   
                               '</div>' +
                           '</div>';
                   
