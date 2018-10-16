@@ -61,7 +61,7 @@
            <%}%>
           </div>
           <div class="col-4 text-center" style="top:5px;">
-            <h2 onclick="goToMenu()" class="mb-2 text-primary">SEXY BLOG</h2>
+            <h2 onclick="goToMenu()" class="mb-2 text-primary center">SEXY BLOG</h2>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center" style="top:5px;">
               <%
