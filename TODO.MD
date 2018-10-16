@@ -1,1 +1,0 @@
-- Load posts with ajax call, remove href from link tag and replace it with a js function

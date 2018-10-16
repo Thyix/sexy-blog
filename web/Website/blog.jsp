@@ -54,7 +54,7 @@
             <% boolean connected = isConnected();
             if (connected) {
             String id = findUserID();%>
-            <a class="text-muted" style="margin-right: 20px;" onclick="modifyPost(<%=id%>)">Mes publications</a>
+            <a class="text-muted" style="margin-right: 20px;" onclick="modifyPost(<%=id%>)" href="#">Mes publications</a>
                 <a class="text-muted" href="createPost.jsp">Créer une publication</a>
             <%} else {%>
                 <a style="top:0;" class="text-muted">Programmation web 2018</a>

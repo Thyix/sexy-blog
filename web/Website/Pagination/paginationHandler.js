@@ -15,7 +15,7 @@ function paginationHandler(id){
                     }
 
                      for(var i = 0; i < numberPost; i++) {
-                        str += '<li class="page-item"><a class="page-link" id="' + i + '" onclick="ajaxPost(this)">' + i + '</a></li>' 
+                        str += '<li class="page-item"><a class="page-link" id="' + i + '" onclick="ajaxPost(this)" href="#">' + i + '</a></li>' 
                      }
                      
                      str +=     '</ul>' +
